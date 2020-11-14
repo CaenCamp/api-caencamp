@@ -12,6 +12,6 @@ class CaencampControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals('{"title":"Caen.Camp\u0027s API"}', $client->getResponse()->getContent());
+        $this->assertSelectorTextContains('html h1', 'API Caen.Camp');
     }
 }

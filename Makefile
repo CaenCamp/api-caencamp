@@ -12,5 +12,8 @@ start: ## Start dev environment en daemon mode
 stop: ## Stop dev environment
 	symfony server:stop
 
+logs: ## Display dev server logs
+	symfony server:log
+
 test: ## Start tests
 	php bin/phpunit

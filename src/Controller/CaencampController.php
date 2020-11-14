@@ -13,6 +13,6 @@ class CaencampController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->json(['title' => "Caen.Camp's API"]);
+        return $this->render('index.html.twig');
     }
 }
