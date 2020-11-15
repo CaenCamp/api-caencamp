@@ -1,20 +1,20 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: Demande d'amélioration
+about: Suggérer une idée pour ce projet
 title: ''
-labels: enhancement
+labels: 'Amélioration :heart:'
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**Votre demande d'amélioration est-elle liée à un problème ? À un manque ? Veuillez le décrire.**
+Une description claire et concise du problème ou du manque. Ex. Je suis toujours frustré quand [...]
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**Décrivez la solution que vous aimeriez**
+Une description claire et concise de ce que vous voulez qu'il se passe.
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**Décrivez les alternatives que vous avez envisagées**
+Une description claire et concise de toutes les solutions ou caractéristiques alternatives que vous avez envisagées.
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+**Contexte supplémentaire**
+Ajoutez ici tout autre contexte ou captures d'écran concernant la demande de fonctionnalité.
