@@ -1,10 +1,10 @@
-# 1. Pourquoi choisir API Plateform
+# 2. Pourquoi choisir API Plateform
 
 Date: 2020-11-15
 
-Décideurs: [liste des personnes impliquée dans la décision] <!-- optional -->
-Ticket.s concerné.s: [description | URL ticket/issue Github] <!-- optional -->
-Pull Request: [PR URL] <!-- optional -->
+-   Décideurs: [Alexis Janvier](https://github.com/orgs/CaenCamp/people/alexisjanvier)
+-   Ticket.s concerné.s: -
+-   Pull.s Request.s: -
 
 ## Statut
 

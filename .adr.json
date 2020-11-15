@@ -1,1 +1,6 @@
-{ "language": "fr", "path": "docs/adr/", "prefix": "api-", "digits": 4 }
+{
+    "language": "fr",
+    "path": "docs/adr/",
+    "prefix": "",
+    "digits": 4
+}
