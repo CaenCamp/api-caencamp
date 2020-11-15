@@ -1,5 +1,7 @@
 # Backend Caen.Camp
 
+![phpunit](https://github.com/CaenCamp/api-caencamp/workflows/phpunit/badge.svg?branch=main)
+
 Ici un top de cet backend: gestion des données liées à l'organisation et à l'historique des caencamp. Données accessible via une API Rest JSON-LD (sémantique) et JSON. Mais aussi GraphQL.
 API Plateform car super outils avec ces préoccupation, donc Php.
 
