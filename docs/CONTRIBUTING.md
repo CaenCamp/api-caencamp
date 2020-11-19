@@ -1,10 +1,10 @@
 - [Contribuer au projet](#contribuer-au-projet)
   - [Code de conduite](#code-de-conduite)
   - [Qu’est ce que je peux faire](#quest-ce-que-je-peux-faire)
-    - [Rapporter des bugs](#rapporter-des-bugs)
-    - [Suggérer des améliorations ou de nouvelles fonctionnalités](#suggérer-des-améliorations-ou-de-nouvelles-fonctionnalités)
-    - [Signaler des manques dans la documentation](#signaler-des-manques-dans-la-documentation)
-    - [Contribuer au code](#contribuer-au-code)
+    - [Rapporter des bugs :bug:](#rapporter-des-bugs-bug)
+    - [Suggérer des améliorations ou de nouvelles fonctionnalités :heart:](#suggérer-des-améliorations-ou-de-nouvelles-fonctionnalités-heart)
+    - [Signaler des manques dans la documentation :blue_book:](#signaler-des-manques-dans-la-documentation-blue_book)
+    - [Contribuer au code :seedling:](#contribuer-au-code-seedling)
   - [L'environnement de développement](#lenvironnement-de-développement)
     - [Prérequis](#prérequis)
     - [L’organisation du code](#lorganisation-du-code)
@@ -36,24 +36,34 @@ En participant, vous devez respecter le [code de conduite du projet](CODE_OF_CON
 
 Beaucoup de choses, l’écriture de code n’étant pas l’unique manière de contribuer au projet !
 
-### Rapporter des bugs
+### Rapporter des bugs :bug:
 
 Il parait que chaque bug relevé sauve un chaton. En tout cas, la technique du [ZBSD (Zero-Bug Software Development)](https://medium.com/quality-functions/the-zero-bug-policy-b0bd987be684) semble porter ses fruits, comme le rapporte [Andrew Fulton](https://medium.com/@andrew.fulton/how-we-got-to-zero-bugs-and-implemented-a-zero-bug-policy-c77ee3f2e50b).
 Donc, si à chaque bug rencontré quelqu’un [ouvre une issue](#ouvrir-une-issue) avec le label **Bug** :bug:, ce seront des familles entières de chats qui seront sauvées.
 
-### Suggérer des améliorations ou de nouvelles fonctionnalités
+### Suggérer des améliorations ou de nouvelles fonctionnalités :heart:
 
 Dans ce cas, ouvrez une nouvelle issue de type **Amélioration** :heart: en décrivant bien votre idée.
 
-### Signaler des manques dans la documentation
+### Signaler des manques dans la documentation :blue_book:
 
 Si pendant votre participation au projet (que ce soit en l'utilisant ou en participant au code) vous n'avez pas réussit à faire quelque chose par manque de solution, signalez le en ouvrant une issue de type **Documentation** :blue_book: .
 
 Et d'ailleurs n'hésitez pas à traiter cette issue en proposant un PR améliorant la documentation si vous avez trouvez une solution !
 
-### Contribuer au code
+### Contribuer au code :seedling:
 
-<!-- Topo sur le projet -->
+Il s'agit donc ici d'un projet de backend/API développé en Php sur une base [Symfony](https://symfony.com/)/[Api Platform](https://api-platform.com/).
+
+<img src="https://www.nilobstat.com/media/1020/logo-symfony.png?width=100" width="100" /> <img src="https://pbs.twimg.com/profile_images/610895782170882048/9jNpgyfh_400x400.png" width="100" />
+
+Le projet consistera dans un premier temps à servir le contenu déjà existant du site des [CaenCamp.s](https://caen.camp) (pour le moment les contenus sont sous forme de fichiers [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) mis en forme par un [Gatsby](https://www.gatsbyjs.com/)).
+
+L'enjeu de cette phase sera de servir un contenu sémantiquement valide et standard au travers d'une API Rest Json *standard*, mais aussi sous forme [Json-ld](https://json-ld.org/) au travers un Api Rest [Hydra](https://json-ld.org/).
+
+Ensuite, cette API devra intégrer les offres d'emploi et intégrant le travail fait sur le projet [jobs-caen-camp](https://github.com/CaenCamp/jobs-caen-camp).
+
+Puis nous pourrons développer les briques d'un *réseau social décentralisé* en s'appuyant sur ces contenus et des technologies de type [ActivityPub](https://www.w3.org/TR/activitypub/), [IndieWeb](https://indieweb.org/), [Solid](https://www.freecodecamp.org/news/an-introduction-to-solid-tim-berners-lees-new-re-decentralized-web-25d6b78c523b/)...
 
 ## L'environnement de développement
 
@@ -61,23 +71,43 @@ Quelle que soit votre type d’implication, ce peut-être une bonne chose que d�
 
 ### Prérequis
 
-<!-- Décrire ce qui doit-être disponible sur un environnement de développement afin de pouvoir installer le projet et le lancer en local -->
+Contrairement aux projets précédents des CCC, l'environnement de développement ne s'appuie plus sur [Docker](https://www.docker.com/).
+
+Cela requière donc l'installation de quelques outils sur votre environnement local. Tout d'abord, vous devez avoir un version de [Php 7.4](https://www.php.net/).
+
+Ensuite, il faut avoir [les extensions Php demandées par Symfony](https://symfony.com/doc/current/setup.html#technical-requirements). Le plus simple pour s'en assurer est d'installer la [Cli de Symfony](https://symfony.com/download).
+
+Vous gagnerez aussi à installer [Composer](https://getcomposer.org/) en global.
+
+Et normalement cela devrait fonctionner.
+
+> Note 1: Pour ceux qui préfèrerait utiliser Docker, API-Plateform a très bien documenté l'utilisation d'un [environnement complet avec Docker-Compose](https://api-platform.com/docs/distribution/#using-the-api-platform-distribution-recommended)
+
+> Note 2: L'environnement de développement va évoluer, et il faudra sans doute bientôt au minima une base de donnée !
+
+> Note 3: N'hésitez pas à [documenter la mise ne place de votre environnement sur le Wiki](https://github.com/CaenCamp/api-caencamp/wiki#lenvironnement-de-d%C3%A9veloppement) ! Cela permettra de couvrir plusieurs environnement (Linux, Mac, Windows, Docker, ...)
 
 ### L’organisation du code
 
-<!-- Description de l'organisation du code si cela vous semble utile. C'est souvent un plus dans la cas de monorepo ... -->
+Le projet respecte l'organisation du code d'un [projet Symfony](https://symfony.com/doc/current/page_creation.html#checking-out-the-project-structure).
 
 ### Installer le projet
 
-<!-- Les étapes nécessaires à l'installation du projet -->
+```bash
+$ make install
+```
 
 ### Démarrer le projet
 
-<!-- Comment lancer le projet en locale -->
+```bash
+$ make start
+```
 
 ## La convention de codage (coding style)
 
-<!-- Décrire les conventions de code du projet, et les outils de linting éventuels -->
+Le code du projet devra respecter le standard de code de [Symfony](https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/2.16/doc/ruleSets/Symfony.rst). 
+
+Pour cela, nous utilisons le projet [PHP Coding Standards Fixer](https://cs.symfony.com/). Ce linter peut être configuré sur de [nombreux Ide.s](https://cs.symfony.com/#helpers).
 
 ## La documentation
 
@@ -103,7 +133,11 @@ Nous suggérons donc d'utiliser le wiki pour y noter tous les *tips*, guides, re
 
 Afin de faciliter l’intégration (le merge) de vos PR, surtout si elles ajoutent ou modifient du code, celles-ci devront contenir les tests couvrant vos propositions.
 
-<!-- Décrire les outils de tests utilisés. -->
+Le projet utilise les outils de [tests standards de Symfony](https://symfony.com/doc/current/testing.html) et ceux décrits dans la [documentation d'API Platform](https://api-platform.com/docs/core/testing/).
+
+```bash
+$ make test
+```
 
 Les tests sont lancés sur la plateforme d’intégration continue de Github via les [Github actions](https://github.com/features/actions).
 

@@ -19,7 +19,7 @@ Ce backend reposera principalement sur la brique technique [API Plateform](https
 
 ## Démarrage rapide
 
-Le [guide du contributeur](./docs/CONTRIBUTING.md#installer-le-projet) détaille les pré-requis et les différents mode d’installation du projet. Mais en partant du postulat que `php 7.4` et `composer` sont installés sur votre environnement, vous pouvez lancer l’installation du projet avec la commande
+Le [guide du contributeur](./docs/CONTRIBUTING.md##lenvironnement-de-développement) détaille les pré-requis et les différents mode d’installation du projet. Mais en partant du postulat que `php 7.4` et `composer` sont installés sur votre environnement, vous pouvez lancer l’installation du projet avec la commande
 
 ```bash
 make install
