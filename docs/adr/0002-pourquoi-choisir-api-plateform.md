@@ -8,70 +8,54 @@ Date: 2020-11-15
 
 ## Statut
 
-<!-- les statuts sont en anglais : proposed/accepted/done/deprecated/superseded -->
-2020-11-15 proposed
+<!-- proposed/accepted/done/deprecated/superseded -->
+2020-11-15 accepted
 
 ## Contexte et énoncé du problème
 
-[Décrivez le contexte et l'énoncé du problème, par exemple, sous forme libre en deux ou trois phrases. Vous pouvez vouloir articuler le problème sous forme de question].
+En ce moment de lancement de la saison 3 des Coding Caen.Camp.s, tous les contenus du site sont encore sous la forme de fichiers mardown, et le site est généré via un générateur de site statique : [Gatsby](https://www.gatsbyjs.com/).
 
-## Moteurs de décision <!-- facultatif -->
+Hors, l'objectif de cette 3ème saison est de fournir des outils de gestion du réseau des Caen.Camp, et la gestion des contenus via des fichiers marckdown risque de ne plus suffir (annuaires, offres d'emploi, fédération de meetup ...). 
 
-* [conducteur 1, par exemple, une force, face à l'inquiétude, ...]
-* [conducteur 2, par exemple, une force, face à l'inquiétude, ...]
-* ... <!-- le nombre de conducteurs peut varier -->
+Il faut donc mettre en place une API permettant de consulter, mais aussi de gérer (CRUD) ces contenus.
+
+## Moteurs de décision
+
+* L'API devra être de type Rest et respecter une spécification HATEOAS reconnue (JSON-API, Hydra, ... à choisir mais une spec)
+* L'API devra être documentée via un contrat OpenAPI
+* L'API devra servir des documents au format JSON mais aussi JSON-LD (pour avoir du contenu facilitant l'interopérabilité)
+* Idéalement, l'API pourrait avoir un version GraphQL
 
 ## Options envisagées
 
-* [option 1]
-* [option 2]
-* [option 3]
-* ... <!-- le nombre d'options peut varier -->
+1. Repartir de la stack node/express utilisée lors de la *saison 2* (projet [jobBoard](https://github.com/CaenCamp/jobs-caen-camp))
+2. Partir sur une stack [API Plateform](https://api-platform.com/)
+3. Rechercher une stack répondant au critère dans une démarche d'exploration ([rweb](https://github.com/kdy1/rweb) en Rust par exemple)
 
 ## Résultat de la décision
 
-Option choisie : "[option 1]", parce que [justification. par exemple, seule l'option qui répond au critère de k.o. déterminant la décision | qui résout la force | ... | est la meilleure (voir ci-dessous)].
+Option choisie : **[2] - API Platform**, parce que ce framework répond à toutes les spécifications (Hydra, OpenAPI, JSON-LD, GraphQL) et offre beaucoups d'outils permettant d'accélérer le développement (console, ORM, migration, déploiement, tests fonctionnels, ...).
 
-### Conséquences positives <!-- facultatif -->
+### Conséquences positives
 
-* [par exemple, amélioration de la satisfaction des attributs de qualité, décisions de suivi requises, ...]
-* …
+* Acceleration du développement
+* Respect des standards
+* Participation des développeurs Php facilitée
+* Base solide pour se lancer dans la décentratlisation (Bundle [API Platform ActivityPub](https://github.com/api-platform/activity-pub))
 
-### Conséquences négatives <!-- facultatif -->
+### Conséquences négatives
 
-* [par exemple, attribut de qualité compromettant, décisions de suivi requises, ...]
-* …
+* On ne pourra pas reprendre directement les développement déjà réalisés sur le jobBoard
+* L'approche "full-stack" sera plus compliqué, en entroduisant un nouveau language dans la stack.
+* L'approche configuration-first de Symfony :trollface:
 
-## Avantages et inconvénients des options <!-- facultatif -->
+## Avantages et inconvénients des autres autres options
 
-### [option 1]
+### [1] - Stack JS du JobBoard
 
-[exemple | description | pointeur vers plus d'informations | ...] <!-- facultatif -->
+Le jobBoard a été codé avec une approche "full JS". Le partie back a été développé en Koa, avec une dba PostgreSQL (avec le query builder Knex). Si cette approche a été riche en découvertes (approche assez bas niveau du développement avec la mise en place manuelle des middlewares, l'absence d'ORM, ...), cela a fortement ralenti le développement. Pour cette troisième saison, où nous visons d'abord la finalisation des outils avant l'approche d'apprentissage (même si cela ne l'exlue pas), cette stack JS manque encore d'outils pour accélérer le developpement.
 
-* Bien, parce que [argument a]
-* Bien, parce que [argument b]
-* Mauvais, parce que [argument c]
-* ... <!-- le nombre de pour et de contre peut varier -->
+### [3] - Découverte d'une nouvelle stack sur une nouvelle techno, type Rust, Clojure ou Go
 
-### [option 2]
+La découverte et l'apprentissage restent le moteur principal des CCC. Mais cette facette devra être temporairement mise de côté sur la partie language / outils, pour se focaliser sur les protocoles, les standards. Du coup, une fois les outils développés et les standards et protocoles maitrisés et/ou établis (par exemple avec une onthologie de nos contenus, un contrat OpenAPI rédigé), rien ne nous empêchera de les implémenter sur d'autres technologies. Ce sera même plus facile de se concentrer sur cette technologie, d'en peser les avantages ou les inconvénients !
 
-[exemple | description | pointeur vers plus d'informations | ...] <!-- facultatif -->
-
-* Bien, parce que [argument a]
-* Bien, parce que [argument b]
-* Mauvais, parce que [argument c]
-* ... <!-- le nombre de pour et de contre peut varier -->
-
-### [option 3]
-
-[exemple | description | pointeur vers plus d'informations | ...] <!-- facultatif -->
-
-* Bien, parce que [argument a]
-* Bien, parce que [argument b]
-* Mauvais, parce que [argument c]
-* ... <!-- le nombre de pour et de contre peut varier -->
-
-## Liens <!-- facultatif -->
-
-* [Type de lien] [Lien vers l'ADR] <!-- exemple : Raffiné par [ADR-0005](0005-exemple.md) -->
-* ... <!-- le nombre de liens peut varier -->
