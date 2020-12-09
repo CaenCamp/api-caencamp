@@ -8,8 +8,7 @@ Date: 2020-11-24
 
 ## Statut
 
-<!-- les statuts sont en anglais : proposed/accepted/done/deprecated/superseded -->
-2020-11-24 proposed
+2020-11-24 accepted
 
 ## Contexte et énoncé du problème
 
@@ -32,51 +31,46 @@ Les sessions de `Codings` CaenCamp sont aussi très proche des `Talks`, à la di
 ## Options envisagées
 
 - **[Option 1]** - Faire un design correspondant aux données existante, puis le faire évoluer vers les descriptions schema.org existantes
-- **[Option 2]** - Faire notre propre description sémantique de contenu (RDFa ?) et ne pas utiliser schema.org afin de limiter le mapping avec les données existantes
+- **[Option 2]** - Faire notre propre description sémantique de contenu (RDFS, OWL) et ne pas utiliser schema.org afin de limiter le mapping avec les données existantes
 - **[Option 3]** - Établir le design d'API en se basant sur schema.org, établir un modèle d'objets correspondant à l'existant, et faire un mapping intermédiaire entre nos objets et le schema d'API.
 
 ## Résultat de la décision
 
-Option choisie : "[option 1]", parce que [justification. par exemple, seule l'option qui répond au critère de k.o. déterminant la décision | qui résout la force | ... | est la meilleure (voir ci-dessous)].
+Option choisie : **"[option 3] - Établir le design d'API en se basant sur schema.org, établir un modèle d'objets correspondant à l'existant, et faire un mapping intermédiaire entre nos objets et le schema d'API"**, parce que c'est celui qui nous permet de ne pas avoir à faire de concessions ni sur notre modèle métier, ni sur notre objectif de standardisation de la donnée.
 
-### Conséquences positives <!-- facultatif -->
+### Conséquences positives
 
-* [par exemple, amélioration de la satisfaction des attributs de qualité, décisions de suivi requises, ...]
-* …
+- Nous gardons un modèle que nous connaissons bien.
+- La donnée existante sera plus facile à importer.
+- Nous pouvons générer rapidement le contrat d'API en se basant sur les descriptions de schema.org.
+- Cette option ne ferme pas complètement les deux autres options : nous pourrons faire évoluer notre modèle, éventuellement pour être plus proche du modèle exposé par l'API. Mais nous pourrons aussi faire évolué le modèle de l'API sans avoir à intervenir sur notre modèle de base de données.
 
-### Conséquences négatives <!-- facultatif -->
+### Conséquences négatives
 
-* [par exemple, attribut de qualité compromettant, décisions de suivi requises, ...]
-* …
+- Une mise en place initial un peu plus longue, puisque il faudra dans un premier temps faire de manière disjointe la mise en place de l'API et du modèle persisté en base, puis d'établir le mapping entre les deux.
 
-## Avantages et inconvénients des options <!-- facultatif -->
+## Avantages et inconvénients des options
 
 ### [option 1] Faire un design correspondant aux données existante, puis le faire évoluer vers les descriptions schema.org existantes
 
+![Proposition de modèle sql](./003-sql-model-proposal.png)
 
+Ce modèle sql traduit au mieux les données existantes en `markdown`, mais aussi assez bien le fonctionnement des CaenCamp. Pour autant, nous somme assez loin du modèle imposé par schema.org. Typiquement, pour une édition d'un CaenCamp, on peut avoir un ou plusieurs talks de type différent (talk long ou lightning talk). Pour schema.org nous devrions avoir un `event` principal (une édition) avec plusieurs `subEvents` (des talks). Du point de vue modèle, cette organisation est moins simple à mettre en place et représente moins nos objets réel ...
 
-### [option 2]
+### [option 2] Faire notre propre description sémantique de contenu
 
-[exemple | description | pointeur vers plus d'informations | ...] <!-- facultatif -->
+Du coup, plutôt que d'adapter nos objets *métier* à ceux de schema.org, on peut réfléchir à mettre en place notre propre description de ce que l'on fait dans un format standard (RDFS, OWS). J'aime bien cette approche, mais :
 
-* Bien, parce que [argument a]
-* Bien, parce que [argument b]
-* Mauvais, parce que [argument c]
-* ... <!-- le nombre de pour et de contre peut varier -->
+1. Je ne maitrise pas assez bien ces standards
+2. Nous produirions des données certes expliquée mais non standardisées, dans le sens reconnues par le plus grand nombre. Ce que fait schema.org
 
-### [option 3]
+Donc approche intéressante, mails il faudrait que nous ayons au moins à discuter d'une telle description avec une autre organisation (par exemple un autre organisateur de meetup).
 
-[exemple | description | pointeur vers plus d'informations | ...] <!-- facultatif -->
+### [option 3] Établir le design d'API en se basant sur schema.org, établir un modèle d'objets correspondant à l'existant, et faire un mapping intermédiaire entre nos objets et le schema d'API
 
-* Bien, parce que [argument a]
-* Bien, parce que [argument b]
-* Mauvais, parce que [argument c]
-* ... <!-- le nombre de pour et de contre peut varier -->
+Cette option consiste donc à garder notre modèle métier, mais à l'exposer via l'API dans un format standardisé.
 
-## Liens <!-- facultatif -->
-
-* [Type de lien] [Lien vers l'ADR] <!-- exemple : Raffiné par [ADR-0005](0005-exemple.md) -->
-* ... <!-- le nombre de liens peut varier -->
+Par exemple, nous devrions transformer une édition et ses talks associés en un `event` comportant autant de `subEvent` que l'édition contient de talks. Un `speaker` deviendrait un `performer` ...
 
 ## Annexes
 
