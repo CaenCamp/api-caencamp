@@ -12,6 +12,10 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
+        with:
+          php-version: "7.4"
 
       - name: PHPUnit
         uses: chindit/actions-phpunit-symfony@master
+        with:
+          php-version: "7.4"
