@@ -9,9 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          php-version: "7.4"
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+      - uses: php-actions/composer@v4
+        with:
+          php-version: "7.4"
 
       - name: PHPUnit
         uses: chindit/actions-phpunit-symfony@master
+        with:
+          php-version: "7.4"
