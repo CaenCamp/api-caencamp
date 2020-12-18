@@ -5,7 +5,6 @@ types:
         properties:
             startDate: { range: "DateTime" }
             endDate: { range: "DateTime" }
-            eventAttendanceMode: { range: "EventAttendanceModeEnumeration" }
             location: { range: "Place" }
             organizer: { range: "Organization" }
             performer: { range: "Person" }
