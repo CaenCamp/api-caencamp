@@ -16,17 +16,8 @@
             "src/Entity/.gitignore"
         ]
     },
-    "api-platform/schema-generator": {
-        "version": "v2.2.2"
-    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
-    },
-    "composer/semver": {
-        "version": "3.2.4"
-    },
-    "composer/xdebug-handler": {
-        "version": "1.4.5"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -104,23 +95,8 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
-    "easyrdf/easyrdf": {
-        "version": "0.9.1"
-    },
     "fig/link-util": {
         "version": "1.1.1"
-    },
-    "friendsofphp/php-cs-fixer": {
-        "version": "2.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.2",
-            "ref": "cc05ab6abf6894bddb9bbd6a252459010ebe040b"
-        },
-        "files": [
-            ".php_cs.dist"
-        ]
     },
     "laminas/laminas-code": {
         "version": "3.5.1"
@@ -130,9 +106,6 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
-    },
-    "league/html-to-markdown": {
-        "version": "4.10.0"
     },
     "monolog/monolog": {
         "version": "2.1.1"
@@ -154,9 +127,6 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.10.0"
-    },
-    "php-cs-fixer/diff": {
-        "version": "v1.3.1"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -340,9 +310,6 @@
             "config/packages/test/monolog.yaml"
         ]
     },
-    "symfony/options-resolver": {
-        "version": "v5.1.9"
-    },
     "symfony/orm-pack": {
         "version": "v2.0.0"
     },
@@ -375,9 +342,6 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.20.0"
-    },
-    "symfony/process": {
-        "version": "v5.1.9"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.5"
