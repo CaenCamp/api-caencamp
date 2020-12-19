@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event
 {
+
     /**
      * @var int|null
      */
@@ -47,6 +48,13 @@ class Event
      * @Assert\DateTime
      */
     private $duration;
+
+    /**
+     * @var string|null The mode of attendance (offline / online / both)
+     * @ApiProperty(iri="https://schema.org/eventAttendanceMode")
+     * this schema.org property is not integrated yet, this is a manual implementation
+     */
+    private $eventAttendanceMode;
 
     /**
      * @var Place|null the location of for example where the event is happening, an organization is located, or where an action takes place
@@ -161,6 +169,16 @@ class Event
     public function setDuration(?\DateTimeInterface $duration)
     {
         $this->duration = $duration;
+    }
+
+    public function getEventAttendanceMode(): string
+    {
+        return $this->eventAttendanceMode;
+    }
+
+    public function setEventAttendanceMode(string $eventAttendanceMode): void
+    {
+        $this->eventAttendanceMode = $eventAttendanceMode;
     }
 
     public function setLocation(?Place $location): void
