@@ -6,7 +6,6 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,24 +13,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Event Documentation on Schema.org
  *
- * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Event")
  */
 class Event
 {
     /**
      * @var int|null
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var \DateTimeInterface|null The start date and time of the item (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601)).
      *
-     * @ORM\Column(type="datetime", nullable=true)
      * @ApiProperty(iri="http://schema.org/startDate")
      * @Assert\DateTime
      */
@@ -40,7 +33,6 @@ class Event
     /**
      * @var \DateTimeInterface|null The end date and time of the item (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601)).
      *
-     * @ORM\Column(type="datetime", nullable=true)
      * @ApiProperty(iri="http://schema.org/endDate")
      * @Assert\DateTime
      */
@@ -49,7 +41,6 @@ class Event
     /**
      * @var Place|null the location of for example where the event is happening, an organization is located, or where an action takes place
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Place")
      * @ApiProperty(iri="http://schema.org/location")
      */
     private $location;
@@ -57,7 +48,6 @@ class Event
     /**
      * @var Organization|null an organizer of an Event
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
      * @ApiProperty(iri="http://schema.org/organizer")
      */
     private $organizer;
@@ -65,7 +55,6 @@ class Event
     /**
      * @var Person|null a performer at the event—for example, a presenter, musician, musical group or actor
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Person")
      * @ApiProperty(iri="http://schema.org/performer")
      */
     private $performer;
@@ -73,7 +62,6 @@ class Event
     /**
      * @var CreativeWork|null the CreativeWork that captured all or part of this Event
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\CreativeWork")
      * @ApiProperty(iri="http://schema.org/recordedIn")
      */
     private $recordedIn;
@@ -81,7 +69,6 @@ class Event
     /**
      * @var Event|null An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event")
      * @ApiProperty(iri="http://schema.org/subEvent")
      */
     private $subEvent;
@@ -89,7 +76,6 @@ class Event
     /**
      * @var Event|null An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event")
      * @ApiProperty(iri="http://schema.org/superEvent")
      */
     private $superEvent;
@@ -97,7 +83,6 @@ class Event
     /**
      * @var string|null An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/additionalType")
      * @Assert\Url
      */
@@ -106,7 +91,6 @@ class Event
     /**
      * @var string|null a description of the item
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/description")
      */
     private $description;
@@ -114,7 +98,6 @@ class Event
     /**
      * @var string|null The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/identifier")
      * @Assert\Url
      */
@@ -123,7 +106,6 @@ class Event
     /**
      * @var string|null An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/image")
      * @Assert\Url
      */
@@ -132,7 +114,6 @@ class Event
     /**
      * @var string|null the name of the item
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/name")
      */
     private $name;

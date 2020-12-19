@@ -6,7 +6,6 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,24 +13,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Organization Documentation on Schema.org
  *
- * @ORM\Entity
  * @ApiResource(iri="http://schema.org/Organization")
  */
 class Organization
 {
     /**
      * @var int|null
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var Organization|null an Organization (or ProgramMembership) to which this Person or Organization belongs
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
      * @ApiProperty(iri="http://schema.org/memberOf")
      */
     private $memberOf;
@@ -39,7 +32,6 @@ class Organization
     /**
      * @var string|null a description of the item
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/description")
      */
     private $description;
@@ -47,7 +39,6 @@ class Organization
     /**
      * @var string|null The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/identifier")
      * @Assert\Url
      */
@@ -56,7 +47,6 @@ class Organization
     /**
      * @var string|null An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/image")
      * @Assert\Url
      */
@@ -65,7 +55,6 @@ class Organization
     /**
      * @var string|null the name of the item
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/name")
      */
     private $name;

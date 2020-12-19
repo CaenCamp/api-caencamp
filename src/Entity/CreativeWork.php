@@ -6,7 +6,6 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,31 +13,27 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/CreativeWork Documentation on Schema.org
  *
- * @ORM\Entity
  * @ApiResource(iri="http://schema.org/CreativeWork")
  */
 class CreativeWork
 {
     /**
      * @var int|null
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text", nullable=true)
      */
+    // abstract est une propriété expérimentale. Faut-il écrire
+    // @ApiProperty(iri="http://schema.org/abstract")
+    // ?
     private $abstract;
 
     /**
      * @var string|null URL of the item
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/url")
      * @Assert\Url
      */
@@ -47,7 +42,6 @@ class CreativeWork
     /**
      * @var string|null The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.
      *
-     * @ORM\Column(type="text", nullable=true)
      * @ApiProperty(iri="http://schema.org/identifier")
      * @Assert\Url
      */
