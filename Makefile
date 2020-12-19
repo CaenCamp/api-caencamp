@@ -17,3 +17,6 @@ logs: ## Display dev server logs
 
 test: ## Start tests
 	php bin/phpunit
+
+contract:
+	php bin/console api:openapi:export --yaml --output=openapi_contract.yaml

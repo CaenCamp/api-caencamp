@@ -33,6 +33,15 @@ make start
 
 Le backend est alors disponible sur <http://localhost:8000>
 
+## Swagger / OpenAPI
+
+Une fois le back-end lancé, l'interface Swagger est disponible à <http://localhost:8000/api>.
+Le contrat OpenAPI est disponible à <http://localhost:8000/docs.json>. Il est générable avec la commande :
+
+```bash
+make contract
+```
+
 ## Participer au projet
 
 Vous souhaitez participer ? Merci à vous :+1:

@@ -1,0 +1,54 @@
+# api/config/schema.yaml
+# The list of types and properties we want to use
+types:
+    Event:
+        properties:
+            startDate: { range: "DateTime" }
+            endDate: { range: "DateTime" }
+            location: { range: "Place" }
+            organizer: { range: "Organization" }
+            performer: { range: "Person" }
+            recordedIn: ~
+            subEvent: ~
+            superEvent: ~
+            additionalType: ~
+            description: ~
+            identifier: ~
+            image: ~
+            name: ~
+    Place:
+        properties:
+            name: ~
+            description: ~
+            address: { range: "PostalAddress" }
+            identifier: ~
+            image: ~
+    PostalAddress:
+        # Disable the generation of the class hierarchy for this type
+        parent: false
+        properties:
+            # Force the type of the addressCountry property to text
+            streetAddress: ~
+            postalCode: ~
+            addressLocality: ~
+            addressCountry: { range: "Text" }
+    Person:
+        properties:
+            givenName: ~
+            additionalName: ~
+            description: ~
+            identifier: ~
+            name: ~
+            image: ~
+    Organization:
+        properties:
+            memberOf: ~
+            description: ~
+            identifier: ~
+            image: ~
+            name: ~
+    CreativeWork:
+        properties:
+            abstract: { range: "Text" }
+            url: ~
+            identifier: ~
