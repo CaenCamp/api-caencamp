@@ -13,7 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Event Documentation on Schema.org
  *
- * @ApiResource(iri="http://schema.org/Event")
+ * @ApiResource(iri="http://schema.org/Event",
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"}
+ * )
  */
 class Event
 {

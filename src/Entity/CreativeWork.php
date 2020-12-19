@@ -13,7 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/CreativeWork Documentation on Schema.org
  *
- * @ApiResource(iri="http://schema.org/CreativeWork")
+ * @ApiResource(
+ *      iri="http://schema.org/CreativeWork",
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"}
+ * )
  */
 class CreativeWork
 {

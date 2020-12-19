@@ -13,7 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Organization Documentation on Schema.org
  *
- * @ApiResource(iri="http://schema.org/Organization")
+ * @ApiResource(iri="http://schema.org/Organization",
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"}
+ * )
  */
 class Organization
 {

@@ -13,7 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Person Documentation on Schema.org
  *
- * @ApiResource(iri="http://schema.org/Person")
+ * @ApiResource(iri="http://schema.org/Person",
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"}
+ * )
  */
 class Person
 {

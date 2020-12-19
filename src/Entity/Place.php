@@ -13,7 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Place Documentation on Schema.org
  *
- * @ApiResource(iri="http://schema.org/Place")
+ * @ApiResource(iri="http://schema.org/Place",
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"}
+ * )
  */
 class Place
 {
