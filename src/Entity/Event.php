@@ -42,6 +42,13 @@ class Event
     private $endDate;
 
     /**
+     * @var \DateTimeInterface|null The duration of the event. (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601#/Durations)).
+     * @ApiProperty(iri="https://schema.org/duration")
+     * @Assert\DateTime
+     */
+    private $duration;
+
+    /**
      * @var Place|null the location of for example where the event is happening, an organization is located, or where an action takes place
      *
      * @ApiProperty(iri="http://schema.org/location")
@@ -144,6 +151,16 @@ class Event
     public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
+    }
+
+    public function getDuration(): ?\DateTimeInterface
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?\DateTimeInterface $duration)
+    {
+        $this->duration = $duration;
     }
 
     public function setLocation(?Place $location): void
