@@ -5,7 +5,7 @@ services:
     image: postgres:12.5
     volumes:
       - caencamp-pgData:/var/lib/postgresql/data
-      - ./var/db-dump:/db-dump
+      - ./data/db-dump:/db-dump
     ports:
       - 5432:5432
     environment:
