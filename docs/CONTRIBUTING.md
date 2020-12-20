@@ -13,6 +13,7 @@
     - [Démarrer le projet](#démarrer-le-projet)
   - [La convention de codage (coding style)](#la-convention-de-codage-coding-style)
   - [La documentation](#la-documentation)
+    - [Le contrat OpenApi](#le-contrat-openapi)
     - [Les ADR.s](#les-adrs)
     - [Le wiki de Github](#le-wiki-de-github)
   - [Les tests](#les-tests)
@@ -131,6 +132,16 @@ Pour cela, nous utilisons le projet [PHP Coding Standards Fixer](https://cs.symf
 Ce n'est pas toujours ce qu'il y a de plus facile à faire sur un projet : écrire une documentation permettant d'utiliser le produit, mais aussi permettant de participer à son élaboration. Et tout aussi difficile, maintenir cette documentation à jours.
 
 Pourtant, et ceci d'expérience, ce sont le plus souvent les projets les mieux documentés qui gagnent l'adhésion de la communauté ! Voici donc les quelques méthodes et règle qui nous avons mis en place aux Coding Caen.Camp.s
+
+### Le contrat OpenApi
+
+Le contrat OpenAPI permet entre autre de générer la documentation en ligne de l'API avec Swagger.
+
+C'est API Plateform qui permet de générer automatiquement la vue swagger, mais il est aussi possible de générer le contrat OpanAPI au format yaml et json. Pour cela, il faut utiliser l'une des recettes du Makefile : 
+
+```bash
+make update_openapi-contract
+```
 
 ### Les ADR.s
 

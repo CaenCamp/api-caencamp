@@ -39,11 +39,6 @@ Une fois le back-end lancé, l'interface Swagger est disponible à <http://local
 
 Le contrat OpenAPI est disponible en `json` à <http://localhost:8000/openapi.json> et en `yaml` à <http://localhost:8000/openapi.yaml>.
 
-Il est générable avec la commande :
-
-```bash
-make contract
-```
 
 ## Participer au projet
 

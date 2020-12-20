@@ -18,7 +18,7 @@ logs: ## Display dev server logs
 test: ## Start tests
 	php bin/phpunit
 
-contract: ## Extract OpenAPI contract in yaml
+update_openapi-contract: ## Extract OpenAPI contract in yaml and json
 	php bin/console api:openapi:export --yaml --output=public/openapi.yaml
 	php bin/console api:openapi:export --output=public/openapi.json
 
