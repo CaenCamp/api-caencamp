@@ -6,6 +6,7 @@ use App\Repository\Internal\OrganizationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=OrganizationRepository::class)
@@ -23,6 +24,12 @@ class Organization
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255,unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -68,6 +75,18 @@ class Organization
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

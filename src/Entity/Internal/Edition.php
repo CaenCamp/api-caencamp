@@ -6,6 +6,7 @@ use App\Repository\Internal\EditionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=EditionRepository::class)
@@ -23,6 +24,12 @@ class Edition
      * @ORM\Column(type="string", length=350)
      */
     private $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=350,unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="smallint")
@@ -101,6 +108,18 @@ class Edition
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

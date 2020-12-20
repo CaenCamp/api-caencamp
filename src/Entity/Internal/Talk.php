@@ -6,6 +6,7 @@ use App\Repository\Internal\TalkRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=TalkRepository::class)
@@ -23,6 +24,12 @@ class Talk
      * @ORM\Column(type="string", length=255)
      */
     private $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=255,unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="text")
@@ -80,6 +87,19 @@ class Talk
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
