@@ -34,8 +34,29 @@ class AppFixtures extends Fixture
     public const TT_LIGHTNING = 'lightning';
     public const TT_CODING = 'coding';
 
+    public const WS_TWITTER = 'twitter';
+    public const WS_GITHUB = 'github';
+    public const WS_LINKEDIN = 'linkedin';
+    public const WS_PERSO = 'perso';
+
     public function load(ObjectManager $manager)
     {
+        $twitter = new WebSiteType();
+        $twitter->setLabel('twitter');
+        $manager->persist($twitter);
+
+        $github = new WebSiteType();
+        $github->setLabel('github');
+        $manager->persist($github);
+
+        $linkedin = new WebSiteType();
+        $linkedin->setLabel('linkedin');
+        $manager->persist($linkedin);
+
+        $perso = new WebSiteType();
+        $perso->setLabel('github');
+        $manager->persist($perso);
+
         $longTalk = new TalkType();
         $longTalk->setLabel('Regular');
         $longTalk->setDescription('Un talk standard de 45 min');
@@ -161,5 +182,9 @@ class AppFixtures extends Fixture
         $this->addReference(self::TT_CODING, $coding);
         $this->addReference(self::TT_LIGHTNING, $ligntning);
         $this->addReference(self::TT_REGULAR, $longTalk);
+        $this->addReference(self::WS_GITHUB, $github);
+        $this->addReference(self::WS_LINKEDIN, $linkedin);
+        $this->addReference(self::WS_PERSO, $perso);
+        $this->addReference(self::WS_TWITTER, $twitter);
     }
 }
