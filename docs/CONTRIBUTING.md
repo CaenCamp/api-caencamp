@@ -7,6 +7,7 @@
     - [Contribuer au code :seedling:](#contribuer-au-code-seedling)
   - [L'environnement de développement](#lenvironnement-de-développement)
     - [Prérequis](#prérequis)
+    - [La base de données](#la-base-de-données)
     - [L’organisation du code](#lorganisation-du-code)
     - [Installer le projet](#installer-le-projet)
     - [Démarrer le projet](#démarrer-le-projet)
@@ -86,6 +87,22 @@ Et normalement cela devrait fonctionner.
 > Note 2: L'environnement de développement va évoluer, et il faudra sans doute bientôt au minima une base de donnée !
 
 > Note 3: N'hésitez pas à [documenter la mise ne place de votre environnement sur le Wiki](https://github.com/CaenCamp/api-caencamp/wiki#lenvironnement-de-d%C3%A9veloppement) ! Cela permettra de couvrir plusieurs environnement (Linux, Mac, Windows, Docker, ...)
+
+### La base de données
+
+> Le projet necessite une base de données PostgreSQL en version 12.
+
+Par default, en local, la base doit être disponible selon la configuration suivante :
+
+```
+// in .env
+DATABASE_URL="postgresql://cc_user:cc_password@127.0.0.1:5432/cc_db?serverVersion=12&charset=utf8"
+```
+
+Vous pouvez surcharger cette configuration dans votre fichier `.env.local`.
+
+Si vous n'avez pas/ne voulez pas installer la base de donnée sur votre environnement local, ou si vous avez déjà un PostgreSQL mais dans une version différente, vous pouvez utilisez [Docker Compose](https://docs.docker.com/compose/). Dans ce cas, vous pourrez utiliser les commande `make db-start` et `make db-stop`. 
+
 
 ### L’organisation du code
 

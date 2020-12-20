@@ -19,7 +19,7 @@ Ce backend reposera principalement sur la brique technique [API Plateform](https
 
 ## Démarrage rapide
 
-Le [guide du contributeur](./docs/CONTRIBUTING.md##lenvironnement-de-développement) détaille les pré-requis et les différents modes d’installation du projet. Mais en partant du postulat que `php 7.4` et `composer` sont installés sur votre environnement, vous pouvez lancer l’installation du projet avec la commande
+Le [guide du contributeur](./docs/CONTRIBUTING.md##lenvironnement-de-développement) détaille les pré-requis et les différents modes d’installation du projet. Mais en partant du postulat que `php 7.4` et `composer` sont installés sur votre environnement, et qu'une base PostgreSQL en version 12 est disponible, vous pouvez lancer l’installation du projet avec la commande
 
 ```bash
 make install
@@ -36,7 +36,10 @@ Le backend est alors disponible sur <http://localhost:8000>
 ## Swagger / OpenAPI
 
 Une fois le back-end lancé, l'interface Swagger est disponible à <http://localhost:8000/api>.
-Le contrat OpenAPI est disponible à <http://localhost:8000/docs.json>. Il est générable avec la commande :
+
+Le contrat OpenAPI est disponible en `json` à <http://localhost:8000/openapi.json> et en `yaml` à <http://localhost:8000/openapi.yaml>.
+
+Il est générable avec la commande :
 
 ```bash
 make contract
