@@ -34,6 +34,11 @@ class TalkType
      */
     private $talks;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $duration_in_minutes;
+
     public function __construct()
     {
         $this->talks = new ArrayCollection();
@@ -94,6 +99,18 @@ class TalkType
                 $talk->setType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDurationInMinutes(): ?int
+    {
+        return $this->duration_in_minutes;
+    }
+
+    public function setDurationInMinutes(int $duration_in_minutes): self
+    {
+        $this->duration_in_minutes = $duration_in_minutes;
 
         return $this;
     }

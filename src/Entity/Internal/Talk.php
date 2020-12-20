@@ -68,6 +68,16 @@ class Talk
      */
     private $Edition;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_html;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_markdown;
+
     public function __construct()
     {
         $this->Tags = new ArrayCollection();
@@ -208,6 +218,30 @@ class Talk
     public function setEdition(?Edition $Edition): self
     {
         $this->Edition = $Edition;
+
+        return $this;
+    }
+
+    public function getDescriptionHtml(): ?string
+    {
+        return $this->description_html;
+    }
+
+    public function setDescriptionHtml(?string $description_html): self
+    {
+        $this->description_html = $description_html;
+
+        return $this;
+    }
+
+    public function getDescriptionMarkdown(): ?string
+    {
+        return $this->description_markdown;
+    }
+
+    public function setDescriptionMarkdown(?string $description_markdown): self
+    {
+        $this->description_markdown = $description_markdown;
 
         return $this;
     }

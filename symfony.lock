@@ -43,6 +43,9 @@
     "doctrine/common": {
         "version": "3.1.0"
     },
+    "doctrine/data-fixtures": {
+        "version": "1.4.4"
+    },
     "doctrine/dbal": {
         "version": "2.12.1"
     },
@@ -59,6 +62,18 @@
             "config/packages/prod/doctrine.yaml",
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "e5b542d4ef47d8a003c91beb35650c76907f7e53"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -98,6 +113,9 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "erusev/parsedown": {
+        "version": "1.7.4"
+    },
     "fig/link-util": {
         "version": "1.1.1"
     },
@@ -112,6 +130,9 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
+    },
+    "mnapoli/front-yaml": {
+        "version": "1.8.0"
     },
     "monolog/monolog": {
         "version": "2.1.1"

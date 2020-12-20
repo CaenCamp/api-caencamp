@@ -89,6 +89,21 @@ class Edition
      */
     private $talks;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_html;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_markdown;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $published;
+
     public function __construct()
     {
         $this->Sponsor = new ArrayCollection();
@@ -270,6 +285,42 @@ class Edition
                 $talk->setEdition(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescriptionHtml(): ?string
+    {
+        return $this->description_html;
+    }
+
+    public function setDescriptionHtml(?string $description_html): self
+    {
+        $this->description_html = $description_html;
+
+        return $this;
+    }
+
+    public function getDescriptionMarkdown(): ?string
+    {
+        return $this->description_markdown;
+    }
+
+    public function setDescriptionMarkdown(?string $description_markdown): self
+    {
+        $this->description_markdown = $description_markdown;
+
+        return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): self
+    {
+        $this->published = $published;
 
         return $this;
     }
