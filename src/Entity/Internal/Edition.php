@@ -75,6 +75,7 @@ class Edition
 
     /**
      * @ORM\ManyToOne(targetEntity=Organization::class, inversedBy="sponsorings")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Sponsor;
 
@@ -88,6 +89,26 @@ class Edition
      * @ORM\OneToMany(targetEntity=Talk::class, mappedBy="Edition")
      */
     private $talks;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_html;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_markdown;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $published;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $meetup_id;
 
     public function __construct()
     {
@@ -270,6 +291,54 @@ class Edition
                 $talk->setEdition(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescriptionHtml(): ?string
+    {
+        return $this->description_html;
+    }
+
+    public function setDescriptionHtml(?string $description_html): self
+    {
+        $this->description_html = $description_html;
+
+        return $this;
+    }
+
+    public function getDescriptionMarkdown(): ?string
+    {
+        return $this->description_markdown;
+    }
+
+    public function setDescriptionMarkdown(?string $description_markdown): self
+    {
+        $this->description_markdown = $description_markdown;
+
+        return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): self
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    public function getMeetupId(): ?string
+    {
+        return $this->meetup_id;
+    }
+
+    public function setMeetupId(?string $meetup_id): self
+    {
+        $this->meetup_id = $meetup_id;
 
         return $this;
     }

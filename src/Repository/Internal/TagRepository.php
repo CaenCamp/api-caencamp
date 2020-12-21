@@ -36,15 +36,13 @@ class TagRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Tag
+    public function findOneByLabel(String $label): ?Tag
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('t.label = :val')
+            ->setParameter('val', $label)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

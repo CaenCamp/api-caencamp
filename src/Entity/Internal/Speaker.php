@@ -51,6 +51,16 @@ class Speaker
      */
     private $talks;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $biography_html;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $biography_markdown;
+
     public function __construct()
     {
         $this->WebSites = new ArrayCollection();
@@ -165,6 +175,30 @@ class Speaker
         if ($this->talks->removeElement($talk)) {
             $talk->removeSpeaker($this);
         }
+
+        return $this;
+    }
+
+    public function getBiographyHtml(): ?string
+    {
+        return $this->biography_html;
+    }
+
+    public function setBiographyHtml(?string $biography_html): self
+    {
+        $this->biography_html = $biography_html;
+
+        return $this;
+    }
+
+    public function getBiographyMarkdown(): ?string
+    {
+        return $this->biography_markdown;
+    }
+
+    public function setBiographyMarkdown(?string $biography_markdown): self
+    {
+        $this->biography_markdown = $biography_markdown;
 
         return $this;
     }
