@@ -7,11 +7,13 @@
     - [Contribuer au code :seedling:](#contribuer-au-code-seedling)
   - [L'environnement de développement](#lenvironnement-de-développement)
     - [Prérequis](#prérequis)
+    - [La base de données](#la-base-de-données)
     - [L’organisation du code](#lorganisation-du-code)
     - [Installer le projet](#installer-le-projet)
     - [Démarrer le projet](#démarrer-le-projet)
   - [La convention de codage (coding style)](#la-convention-de-codage-coding-style)
   - [La documentation](#la-documentation)
+    - [Le contrat OpenApi](#le-contrat-openapi)
     - [Les ADR.s](#les-adrs)
     - [Le wiki de Github](#le-wiki-de-github)
   - [Les tests](#les-tests)
@@ -87,6 +89,22 @@ Et normalement cela devrait fonctionner.
 
 > Note 3: N'hésitez pas à [documenter la mise ne place de votre environnement sur le Wiki](https://github.com/CaenCamp/api-caencamp/wiki#lenvironnement-de-d%C3%A9veloppement) ! Cela permettra de couvrir plusieurs environnement (Linux, Mac, Windows, Docker, ...)
 
+### La base de données
+
+> Le projet necessite une base de données PostgreSQL en version 12.
+
+Par default, en local, la base doit être disponible selon la configuration suivante :
+
+```
+// in .env
+DATABASE_URL="postgresql://cc_user:cc_password@127.0.0.1:5432/cc_db?serverVersion=12&charset=utf8"
+```
+
+Vous pouvez surcharger cette configuration dans votre fichier `.env.local`.
+
+Si vous n'avez pas/ne voulez pas installer la base de donnée sur votre environnement local, ou si vous avez déjà un PostgreSQL mais dans une version différente, vous pouvez utilisez [Docker Compose](https://docs.docker.com/compose/). Dans ce cas, vous pourrez utiliser les commande `make db-start` et `make db-stop`. 
+
+
 ### L’organisation du code
 
 Le projet respecte l'organisation du code d'un [projet Symfony](https://symfony.com/doc/current/page_creation.html#checking-out-the-project-structure).
@@ -114,6 +132,16 @@ Pour cela, nous utilisons le projet [PHP Coding Standards Fixer](https://cs.symf
 Ce n'est pas toujours ce qu'il y a de plus facile à faire sur un projet : écrire une documentation permettant d'utiliser le produit, mais aussi permettant de participer à son élaboration. Et tout aussi difficile, maintenir cette documentation à jours.
 
 Pourtant, et ceci d'expérience, ce sont le plus souvent les projets les mieux documentés qui gagnent l'adhésion de la communauté ! Voici donc les quelques méthodes et règle qui nous avons mis en place aux Coding Caen.Camp.s
+
+### Le contrat OpenApi
+
+Le contrat OpenAPI permet entre autre de générer la documentation en ligne de l'API avec Swagger.
+
+C'est API Plateform qui permet de générer automatiquement la vue swagger, mais il est aussi possible de générer le contrat OpanAPI au format yaml et json. Pour cela, il faut utiliser l'une des recettes du Makefile : 
+
+```bash
+make update_openapi-contract
+```
 
 ### Les ADR.s
 

@@ -1,0 +1,1055 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /api/creative_works:
+    get:
+      tags:
+        - CreativeWork
+      operationId: getCreativeWorkCollection
+      summary: 'Retrieves the collection of CreativeWork resources.'
+      responses:
+        200:
+          description: 'CreativeWork collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/CreativeWork:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreativeWork'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreativeWork'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+  '/api/creative_works/{id}':
+    get:
+      tags:
+        - CreativeWork
+      operationId: getCreativeWorkItem
+      summary: 'Retrieves a CreativeWork resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'CreativeWork resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/CreativeWork:jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreativeWork'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/CreativeWork'
+        404:
+          description: 'Resource not found'
+  /api/events:
+    get:
+      tags:
+        - Event
+      operationId: getEventCollection
+      summary: 'Retrieves the collection of Event resources.'
+      responses:
+        200:
+          description: 'Event collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Event:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+  '/api/events/{id}':
+    get:
+      tags:
+        - Event
+      operationId: getEventItem
+      summary: 'Retrieves a Event resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Event resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Event:jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Event'
+        404:
+          description: 'Resource not found'
+  /api/organizations:
+    get:
+      tags:
+        - Organization
+      operationId: getOrganizationCollection
+      summary: 'Retrieves the collection of Organization resources.'
+      responses:
+        200:
+          description: 'Organization collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Organization:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+  '/api/organizations/{id}':
+    get:
+      tags:
+        - Organization
+      operationId: getOrganizationItem
+      summary: 'Retrieves a Organization resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Organization resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Organization:jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        404:
+          description: 'Resource not found'
+  /api/people:
+    get:
+      tags:
+        - Person
+      operationId: getPersonCollection
+      summary: 'Retrieves the collection of Person resources.'
+      responses:
+        200:
+          description: 'Person collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Person:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+  '/api/people/{id}':
+    get:
+      tags:
+        - Person
+      operationId: getPersonItem
+      summary: 'Retrieves a Person resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Person resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Person:jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Person'
+        404:
+          description: 'Resource not found'
+  /api/places:
+    get:
+      tags:
+        - Place
+      operationId: getPlaceCollection
+      summary: 'Retrieves the collection of Place resources.'
+      responses:
+        200:
+          description: 'Place collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Place:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Place'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Place'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+  '/api/places/{id}':
+    get:
+      tags:
+        - Place
+      operationId: getPlaceItem
+      summary: 'Retrieves a Place resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Place resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Place:jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Place'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Place'
+        404:
+          description: 'Resource not found'
+  /api/postal_addresses:
+    get:
+      tags:
+        - PostalAddress
+      operationId: getPostalAddressCollection
+      summary: 'Retrieves the collection of PostalAddress resources.'
+      responses:
+        200:
+          description: 'PostalAddress collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/PostalAddress:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostalAddress'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostalAddress'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+  '/api/postal_addresses/{id}':
+    get:
+      tags:
+        - PostalAddress
+      operationId: getPostalAddressItem
+      summary: 'Retrieves a PostalAddress resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'PostalAddress resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PostalAddress:jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostalAddress'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PostalAddress'
+        404:
+          description: 'Resource not found'
+components:
+  schemas:
+    CreativeWork:
+      type: object
+      description: 'The most generic kind of creative work, including books, movies, photographs, software programs, etc.'
+      externalDocs:
+        url: 'http://schema.org/CreativeWork'
+      properties:
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        abstract:
+          type: string
+          nullable: true
+        url:
+          description: 'URL of the item'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+    'CreativeWork:jsonld':
+      type: object
+      description: 'The most generic kind of creative work, including books, movies, photographs, software programs, etc.'
+      externalDocs:
+        url: 'http://schema.org/CreativeWork'
+      properties:
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        '@context':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        abstract:
+          type: string
+          nullable: true
+        url:
+          description: 'URL of the item'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+    Event:
+      type: object
+      description: 'An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the \[\[offers\]\] property. Repeated events may be structured as separate Event objects.'
+      externalDocs:
+        url: 'http://schema.org/Event'
+      properties:
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        startDate:
+          description: 'The start date and time of the item (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601)).'
+          externalDocs:
+            url: 'http://schema.org/startDate'
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          description: 'The end date and time of the item (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601)).'
+          externalDocs:
+            url: 'http://schema.org/endDate'
+          type: string
+          format: date-time
+          nullable: true
+        duration:
+          description: 'The duration of the event. (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601#/Durations)).'
+          externalDocs:
+            url: 'https://schema.org/duration'
+          type: string
+          format: date-time
+          nullable: true
+        eventAttendanceMode:
+          description: 'The mode of attendance (offline / online / both)'
+          externalDocs:
+            url: 'https://schema.org/eventAttendanceMode'
+          type: string
+          nullable: true
+        location:
+          description: 'the location of for example where the event is happening, an organization is located, or where an action takes place'
+          externalDocs:
+            url: 'http://schema.org/location'
+          type: string
+          format: iri-reference
+          nullable: true
+        organizer:
+          description: 'an organizer of an Event'
+          externalDocs:
+            url: 'http://schema.org/organizer'
+          type: string
+          format: iri-reference
+          nullable: true
+        performer:
+          description: 'a performer at the event—for example, a presenter, musician, musical group or actor'
+          externalDocs:
+            url: 'http://schema.org/performer'
+          type: string
+          format: iri-reference
+          nullable: true
+        recordedIn:
+          description: 'the CreativeWork that captured all or part of this Event'
+          externalDocs:
+            url: 'http://schema.org/recordedIn'
+          type: string
+          format: iri-reference
+          nullable: true
+        subEvent:
+          description: 'An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.'
+          externalDocs:
+            url: 'http://schema.org/subEvent'
+          type: string
+          format: iri-reference
+          nullable: true
+        superEvent:
+          description: 'An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.'
+          externalDocs:
+            url: 'http://schema.org/superEvent'
+          type: string
+          format: iri-reference
+          nullable: true
+        additionalType:
+          description: 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the ''typeof'' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.'
+          externalDocs:
+            url: 'http://schema.org/additionalType'
+          type: string
+          nullable: true
+        description:
+          description: 'a description of the item'
+          externalDocs:
+            url: 'http://schema.org/description'
+          type: string
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+        image:
+          description: 'An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].'
+          externalDocs:
+            url: 'http://schema.org/image'
+          type: string
+          nullable: true
+        name:
+          description: 'the name of the item'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+          nullable: true
+    'Event:jsonld':
+      type: object
+      description: 'An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the \[\[offers\]\] property. Repeated events may be structured as separate Event objects.'
+      externalDocs:
+        url: 'http://schema.org/Event'
+      properties:
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        '@context':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        startDate:
+          description: 'The start date and time of the item (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601)).'
+          externalDocs:
+            url: 'http://schema.org/startDate'
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          description: 'The end date and time of the item (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601)).'
+          externalDocs:
+            url: 'http://schema.org/endDate'
+          type: string
+          format: date-time
+          nullable: true
+        duration:
+          description: 'The duration of the event. (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601#/Durations)).'
+          externalDocs:
+            url: 'https://schema.org/duration'
+          type: string
+          format: date-time
+          nullable: true
+        eventAttendanceMode:
+          description: 'The mode of attendance (offline / online / both)'
+          externalDocs:
+            url: 'https://schema.org/eventAttendanceMode'
+          type: string
+          nullable: true
+        location:
+          description: 'the location of for example where the event is happening, an organization is located, or where an action takes place'
+          externalDocs:
+            url: 'http://schema.org/location'
+          type: string
+          format: iri-reference
+          nullable: true
+        organizer:
+          description: 'an organizer of an Event'
+          externalDocs:
+            url: 'http://schema.org/organizer'
+          type: string
+          format: iri-reference
+          nullable: true
+        performer:
+          description: 'a performer at the event—for example, a presenter, musician, musical group or actor'
+          externalDocs:
+            url: 'http://schema.org/performer'
+          type: string
+          format: iri-reference
+          nullable: true
+        recordedIn:
+          description: 'the CreativeWork that captured all or part of this Event'
+          externalDocs:
+            url: 'http://schema.org/recordedIn'
+          type: string
+          format: iri-reference
+          nullable: true
+        subEvent:
+          description: 'An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.'
+          externalDocs:
+            url: 'http://schema.org/subEvent'
+          type: string
+          format: iri-reference
+          nullable: true
+        superEvent:
+          description: 'An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.'
+          externalDocs:
+            url: 'http://schema.org/superEvent'
+          type: string
+          format: iri-reference
+          nullable: true
+        additionalType:
+          description: 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the ''typeof'' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.'
+          externalDocs:
+            url: 'http://schema.org/additionalType'
+          type: string
+          nullable: true
+        description:
+          description: 'a description of the item'
+          externalDocs:
+            url: 'http://schema.org/description'
+          type: string
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+        image:
+          description: 'An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].'
+          externalDocs:
+            url: 'http://schema.org/image'
+          type: string
+          nullable: true
+        name:
+          description: 'the name of the item'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+          nullable: true
+    Organization:
+      type: object
+      description: 'An organization such as a school, NGO, corporation, club, etc.'
+      externalDocs:
+        url: 'http://schema.org/Organization'
+      properties:
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        memberOf:
+          description: 'an Organization (or ProgramMembership) to which this Person or Organization belongs'
+          externalDocs:
+            url: 'http://schema.org/memberOf'
+          type: string
+          format: iri-reference
+          nullable: true
+        description:
+          description: 'a description of the item'
+          externalDocs:
+            url: 'http://schema.org/description'
+          type: string
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+        image:
+          description: 'An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].'
+          externalDocs:
+            url: 'http://schema.org/image'
+          type: string
+          nullable: true
+        name:
+          description: 'the name of the item'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+          nullable: true
+    'Organization:jsonld':
+      type: object
+      description: 'An organization such as a school, NGO, corporation, club, etc.'
+      externalDocs:
+        url: 'http://schema.org/Organization'
+      properties:
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        '@context':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        memberOf:
+          description: 'an Organization (or ProgramMembership) to which this Person or Organization belongs'
+          externalDocs:
+            url: 'http://schema.org/memberOf'
+          type: string
+          format: iri-reference
+          nullable: true
+        description:
+          description: 'a description of the item'
+          externalDocs:
+            url: 'http://schema.org/description'
+          type: string
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+        image:
+          description: 'An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].'
+          externalDocs:
+            url: 'http://schema.org/image'
+          type: string
+          nullable: true
+        name:
+          description: 'the name of the item'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+          nullable: true
+    Person:
+      type: object
+      description: 'A person (alive, dead, undead, or fictional).'
+      externalDocs:
+        url: 'http://schema.org/Person'
+      properties:
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        givenName:
+          description: 'Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.'
+          externalDocs:
+            url: 'http://schema.org/givenName'
+          type: string
+          nullable: true
+        additionalName:
+          description: 'an additional name for a Person, can be used for a middle name'
+          externalDocs:
+            url: 'http://schema.org/additionalName'
+          type: string
+          nullable: true
+        description:
+          description: 'a description of the item'
+          externalDocs:
+            url: 'http://schema.org/description'
+          type: string
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+        name:
+          description: 'the name of the item'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+          nullable: true
+        image:
+          description: 'An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].'
+          externalDocs:
+            url: 'http://schema.org/image'
+          type: string
+          nullable: true
+    'Person:jsonld':
+      type: object
+      description: 'A person (alive, dead, undead, or fictional).'
+      externalDocs:
+        url: 'http://schema.org/Person'
+      properties:
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        '@context':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        givenName:
+          description: 'Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.'
+          externalDocs:
+            url: 'http://schema.org/givenName'
+          type: string
+          nullable: true
+        additionalName:
+          description: 'an additional name for a Person, can be used for a middle name'
+          externalDocs:
+            url: 'http://schema.org/additionalName'
+          type: string
+          nullable: true
+        description:
+          description: 'a description of the item'
+          externalDocs:
+            url: 'http://schema.org/description'
+          type: string
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+        name:
+          description: 'the name of the item'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+          nullable: true
+        image:
+          description: 'An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].'
+          externalDocs:
+            url: 'http://schema.org/image'
+          type: string
+          nullable: true
+    Place:
+      type: object
+      description: 'Entities that have a somewhat fixed, physical extension.'
+      externalDocs:
+        url: 'http://schema.org/Place'
+      properties:
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        name:
+          description: 'the name of the item'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+          nullable: true
+        description:
+          description: 'a description of the item'
+          externalDocs:
+            url: 'http://schema.org/description'
+          type: string
+          nullable: true
+        address:
+          description: 'physical address of the item'
+          externalDocs:
+            url: 'http://schema.org/address'
+          type: string
+          format: iri-reference
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+        image:
+          description: 'An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].'
+          externalDocs:
+            url: 'http://schema.org/image'
+          type: string
+          nullable: true
+    'Place:jsonld':
+      type: object
+      description: 'Entities that have a somewhat fixed, physical extension.'
+      externalDocs:
+        url: 'http://schema.org/Place'
+      properties:
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        '@context':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        name:
+          description: 'the name of the item'
+          externalDocs:
+            url: 'http://schema.org/name'
+          type: string
+          nullable: true
+        description:
+          description: 'a description of the item'
+          externalDocs:
+            url: 'http://schema.org/description'
+          type: string
+          nullable: true
+        address:
+          description: 'physical address of the item'
+          externalDocs:
+            url: 'http://schema.org/address'
+          type: string
+          format: iri-reference
+          nullable: true
+        identifier:
+          description: 'The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          nullable: true
+        image:
+          description: 'An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].'
+          externalDocs:
+            url: 'http://schema.org/image'
+          type: string
+          nullable: true
+    PostalAddress:
+      type: object
+      description: 'The mailing address.'
+      externalDocs:
+        url: 'http://schema.org/PostalAddress'
+      properties:
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        streetAddress:
+          description: 'The street address. For example, 1600 Amphitheatre Pkwy.'
+          externalDocs:
+            url: 'http://schema.org/streetAddress'
+          type: string
+          nullable: true
+        postalCode:
+          description: 'The postal code. For example, 94043.'
+          externalDocs:
+            url: 'http://schema.org/postalCode'
+          type: string
+          nullable: true
+        addressLocality:
+          description: 'The locality. For example, Mountain View.'
+          externalDocs:
+            url: 'http://schema.org/addressLocality'
+          type: string
+          nullable: true
+        addressCountry:
+          description: 'The country. For example, USA. You can also provide the two-letter \[ISO 3166-1 alpha-2 country code\](http://en.wikipedia.org/wiki/ISO\_3166-1).'
+          externalDocs:
+            url: 'http://schema.org/addressCountry'
+          type: string
+          nullable: true
+    'PostalAddress:jsonld':
+      type: object
+      description: 'The mailing address.'
+      externalDocs:
+        url: 'http://schema.org/PostalAddress'
+      properties:
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        '@context':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+          nullable: true
+        streetAddress:
+          description: 'The street address. For example, 1600 Amphitheatre Pkwy.'
+          externalDocs:
+            url: 'http://schema.org/streetAddress'
+          type: string
+          nullable: true
+        postalCode:
+          description: 'The postal code. For example, 94043.'
+          externalDocs:
+            url: 'http://schema.org/postalCode'
+          type: string
+          nullable: true
+        addressLocality:
+          description: 'The locality. For example, Mountain View.'
+          externalDocs:
+            url: 'http://schema.org/addressLocality'
+          type: string
+          nullable: true
+        addressCountry:
+          description: 'The country. For example, USA. You can also provide the two-letter \[ISO 3166-1 alpha-2 country code\](http://en.wikipedia.org/wiki/ISO\_3166-1).'
+          externalDocs:
+            url: 'http://schema.org/addressCountry'
+          type: string
+          nullable: true
