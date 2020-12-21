@@ -21,7 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Place
 {
     /**
-     * @var int|null
+     * @var string|null
+     * @ApiProperty(identifier=true)
      */
     private $id;
 
@@ -62,7 +63,12 @@ class Place
      */
     private $image;
 
-    public function getId(): ?int
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -87,25 +93,25 @@ class Place
         return $this->description;
     }
 
-    public function setAddress(?PostalAddress $address): void
-    {
-        $this->address = $address;
-    }
+    /* public function setAddress(?PostalAddress $address): void */
+    /* { */
+    /*     $this->address = $address; */
+    /* } */
 
-    public function getAddress(): ?PostalAddress
-    {
-        return $this->address;
-    }
+    /* public function getAddress(): ?PostalAddress */
+    /* { */
+    /*     return $this->address; */
+    /* } */
 
-    public function setIdentifier(?string $identifier): void
-    {
-        $this->identifier = $identifier;
-    }
+    /* public function setIdentifier(?string $identifier): void */
+    /* { */
+    /*     $this->identifier = $identifier; */
+    /* } */
 
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
-    }
+    /* public function getIdentifier(): ?string */
+    /* { */
+    /*     return $this->identifier; */
+    /* } */
 
     public function setImage(?string $image): void
     {

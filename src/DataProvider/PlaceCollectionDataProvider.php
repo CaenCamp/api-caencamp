@@ -3,12 +3,12 @@ namespace App\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use App\Entity\Organization;
-use App\Entity\Internal\Organization as Enterprise;
+use App\Entity\Place;
+use App\Entity\Internal\Place as Location;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-final class OrganizationCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
+final class PlaceCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     private $managerRegistry;
 
@@ -19,7 +19,7 @@ final class OrganizationCollectionDataProvider implements ContextAwareCollection
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return Organization::class === $resourceClass;
+        return Place::class === $resourceClass;
     }
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable
@@ -28,23 +28,23 @@ final class OrganizationCollectionDataProvider implements ContextAwareCollection
         $page = isset($pagination['page']) && !!$pagination['page'] ? $pagination['page'] :  1;
         $perPage = isset($pagination['itemsPerPage'])  ? $pagination['itemsPerPage'] : 20;
         $offset = $perPage * ($page - 1);
-        $manager = $this->managerRegistry->getManagerForClass(Enterprise::class);
-        $repository = $manager->getRepository(Enterprise::class);
+        $manager = $this->managerRegistry->getManagerForClass(Location::class);
+        $repository = $manager->getRepository(Location::class);
         $query = $repository->createQueryBuilder('c')
             ->orderBy('c.name', 'ASC')
             ->setMaxResults($perPage)
             ->setFirstResult($offset)
             ->getQuery()
         ;
-        $enterprises = new Paginator($query);
+        $locations = new Paginator($query);
         $collection = array();
-        foreach ($enterprises as $enterprise) {
-            $orga = new Organization();
-            $orga->setId($enterprise->getSlug());
-            $orga->setName($enterprise->getName() );
-            $orga->setDescription($enterprise->getDescription());
-            $orga->setImage($enterprise->getLogo());
-            $collection[] = $orga;
+        foreach ($locations as $location) {
+            $place = new Place();
+            $place->setId($location->getSlug());
+            $place->setName($location->getName());
+            $place->setDescription($location->getDescription());
+            $place->setImage($location->getLogo());
+            $collection[] = $place;
         }
 
         return $collection;
