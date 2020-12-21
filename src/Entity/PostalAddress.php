@@ -13,7 +13,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  * @see http://schema.org/PostalAddress Documentation on Schema.org
  *
  * @ApiResource(iri="http://schema.org/PostalAddress", 
- *      collectionOperations={"get"},
+ *      collectionOperations={},
  *      itemOperations={"get"}
  * )
  */

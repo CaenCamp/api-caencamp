@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(
  *      iri="http://schema.org/CreativeWork",
- *      collectionOperations={"get"},
+ *      collectionOperations={},
  *      itemOperations={"get"}
  * )
  */

@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @see http://schema.org/Person Documentation on Schema.org
  *
  * @ApiResource(iri="http://schema.org/Person",
- *      collectionOperations={"get"},
+ *      collectionOperations={},
  *      itemOperations={"get"}
  * )
  */
