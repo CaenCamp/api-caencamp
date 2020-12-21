@@ -29,6 +29,7 @@ class AppFixtures extends Fixture
     public const PLACE_DOME = 'dome';
     public const PLACE_HEY = 'hey';
     public const PLACE_IMIE = 'imie';
+    public const PLACE_INCUBATION = 'incubation';
 
     public const TT_REGULAR = 'regular';
     public const TT_LIGHTNING = 'lightning';
@@ -116,6 +117,16 @@ class AppFixtures extends Fixture
         $hey->setCoutry("FR");
         $manager->persist($hey);
 
+        $incubation = new Place();
+        $incubation->setName('Normandie Incubation');
+        $incubation->setDescription("Incubateur de projets innovants depuis plus de 20 ans, nous vous accompagnons dans la création de votre startup.");
+        $incubation->setUrl('https://www.normandie-incubation.com/');
+        $incubation->setAddress1("17 rue Claude Bloch");
+        $incubation->setPostalCode("14000");
+        $incubation->setCity("Caen");
+        $incubation->setCoutry("FR");
+        $manager->persist($incubation);
+
         $editionCategoryCC = new EditionCategory();
         $editionCategoryCC->setLabel("CaenCamp");
         $editionCategoryCC->setDescription("Les rendez-vous des CaenCamp.s");
@@ -179,6 +190,7 @@ class AppFixtures extends Fixture
         $this->addReference(self::PLACE_FORUM, $forum);
         $this->addReference(self::PLACE_HEY, $hey);
         $this->addReference(self::PLACE_IMIE, $imie);
+        $this->addReference(self::PLACE_INCUBATION, $incubation);
         $this->addReference(self::TT_CODING, $coding);
         $this->addReference(self::TT_LIGHTNING, $ligntning);
         $this->addReference(self::TT_REGULAR, $longTalk);

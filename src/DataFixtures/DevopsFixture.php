@@ -2,16 +2,82 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Internal\Edition;
+use App\Entity\Internal\Talk;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Mni\FrontYAML\Parser;
+use Html2Text\Html2Text;
+use App\DataFixtures\TagFixture;
+use App\DataFixtures\AppFixtures;
+use App\DataFixtures\SpeakerFixtures;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class DevopsFixture extends Fixture
+class DevopsFixture extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        $parser = new Parser();
+
+        $devopsPath = getcwd() . '/data/markdown/ccd';
+        $files = scandir($devopsPath);
+        for ($i = 2; $i < count($files); $i++) {
+            $file = file_get_contents($devopsPath . '/' . $files[$i], true);
+            $document = $parser->parse($file, false);
+            $yaml = $document->getYAML();
+            $documentHtml = $parser->parse($file);
+            $markdown = $document->getContent();
+            $html = $documentHtml->getContent();
+            $html2TextConverter = new Html2Text($html);
+            $description = $html2TextConverter->getText();
+
+            $edition = new Edition();
+            $edition->setNumber($yaml['edition']);
+            $edition->setTitle($yaml['title']);
+            $edition->setPublished(true);
+            $edition->setDescription($description);
+            $edition->setDescriptionHtml($html);
+            $edition->setDescriptionMarkdown($markdown);
+            $edition->setStartDateTime(new \DateTime($yaml['date']));
+            $edition->setShortDescription($yaml['description']);
+            $edition->setOrganizer($this->getReference(AppFixtures::ORGA_CC));
+            $edition->setSponsor(null);
+            $edition->setCategory($this->getReference(AppFixtures::EDITION_CATEGORY_DCC));
+            $place = $this->getReference(AppFixtures::PLACE_INCUBATION);
+            $edition->setPlace($place);
+            $edition->setMode($this->getReference(AppFixtures::EDITION_MODE_OFFLINE));
+            if (!!$yaml['meetupId']) {
+                $edition->setMeetupId($yaml['meetupId']);
+            }
+
+            foreach ($yaml['talks'] as $subject) {
+                $talk = new Talk();
+                $talk->setShortDescription($yaml['description']);
+                $talk->setDescription($description);
+                $talk->setTitle($subject['title']);
+                $talk->setType($this->getReference(AppFixtures::TT_REGULAR));
+                foreach ($subject['speakers'] as $slug) {
+                    $speaker= $manager->getRepository('App\Entity\Internal\Speaker')->findOneBySlug($slug);
+                    if (!!$speaker) {
+                        $talk->addSpeaker($speaker);
+                    }
+                }
+                $manager->persist($talk);
+                $edition->addTalk($talk);
+            }
+
+            $manager->persist($edition);
+        }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return array(
+            AppFixtures::class,
+            SpeakerFixtures::class,
+            TagFixture::class,
+        );
     }
 }
