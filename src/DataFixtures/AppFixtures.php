@@ -163,18 +163,21 @@ class AppFixtures extends Fixture
         $caencamp->setName("CaenCamp");
         $caencamp->setDescription("Le meetup des développeurs caennais");
         $caencamp->setUrl("https://caen.camp");
+        $caencamp->setLogo("https://www.caen.camp/static/logoFondBlanc-278da657a83902f7d21083ade8e9ce7a.png");
         $manager->persist($caencamp);
 
         $sii = new Organization();
         $sii->setName("SII");
         $sii->setDescription("Fondé en 1979, le Groupe SII est une Entreprise de Services du Numérique à dimension internationale disposant d’une large couverture géographique avec 88 implantations réparties sur 4 continents.");
         $sii->setUrl("https://sii-group.com/fr-FR");
+        $sii->setLogo("https://sii-group.com/themes/custom/sii/logo.svg");
         $manager->persist($sii);
 
         $imagile = new Organization();
         $imagile->setName("Imagile");
         $imagile->setDescription("Nous pensons et développons des applications web et mobiles qui plaisent à vos utilisateurs");
         $imagile->setUrl("https://www.imagile.fr/");
+        $imagile->setLogo("https://hoodspot.fr/uploads/500/927/50092784300028/logo.jpg");
         $manager->persist($imagile);
 
         $manager->flush();
