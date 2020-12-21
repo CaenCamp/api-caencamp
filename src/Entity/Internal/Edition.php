@@ -75,6 +75,7 @@ class Edition
 
     /**
      * @ORM\ManyToOne(targetEntity=Organization::class, inversedBy="sponsorings")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Sponsor;
 
@@ -103,6 +104,11 @@ class Edition
      * @ORM\Column(type="boolean")
      */
     private $published;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $meetup_id;
 
     public function __construct()
     {
@@ -321,6 +327,18 @@ class Edition
     public function setPublished(bool $published): self
     {
         $this->published = $published;
+
+        return $this;
+    }
+
+    public function getMeetupId(): ?string
+    {
+        return $this->meetup_id;
+    }
+
+    public function setMeetupId(?string $meetup_id): self
+    {
+        $this->meetup_id = $meetup_id;
 
         return $this;
     }
