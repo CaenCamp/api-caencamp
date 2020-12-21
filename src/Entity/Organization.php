@@ -15,7 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(iri="http://schema.org/Organization",
  *      collectionOperations={"get"},
- *      itemOperations={"get"}
+ *      itemOperations={"get"},
+ *      attributes={"pagination_items_per_page"=20, "maximum_items_per_page"=50}
  * )
  */
 class Organization
