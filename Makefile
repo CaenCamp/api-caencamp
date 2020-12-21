@@ -30,3 +30,7 @@ db-stop: ## stop Docker Compose PG
 
 db-logs: ## Display pg logs from Docker Compose
 	docker-compose logs -f
+
+db-init: ## Play all migration and import data from legacy markdown files
+	php bin/console doctrine:migrations:migrate -n
+	php bin/console doctrine:fixtures:load -n

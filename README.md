@@ -31,6 +31,12 @@ et lancer le backend avec :
 make start
 ```
 
+Vous pouvez aussi peupler la base de données avec celles en markdown de l'ancien site (Gatsby) :
+
+```bash
+make db-init
+```
+
 Le backend est alors disponible sur <http://localhost:8000>
 
 ## Swagger / OpenAPI

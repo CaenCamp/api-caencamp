@@ -104,6 +104,11 @@ Vous pouvez surcharger cette configuration dans votre fichier `.env.local`.
 
 Si vous n'avez pas/ne voulez pas installer la base de donnée sur votre environnement local, ou si vous avez déjà un PostgreSQL mais dans une version différente, vous pouvez utilisez [Docker Compose](https://docs.docker.com/compose/). Dans ce cas, vous pourrez utiliser les commande `make db-start` et `make db-stop`. 
 
+Et quelque soit la solution choisie, vous devrez initialiser votre base en jouant les migrations et en important les données existantes (depuis des fichiers markdown de Gatsby) : 
+
+```bash
+make db-init
+```
 
 ### L’organisation du code
 
