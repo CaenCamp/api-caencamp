@@ -21,7 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Person
 {
     /**
-     * @var int|null
+     * @var string|null
+     * @ApiProperty(identifier=true)
      */
     private $id;
 
@@ -69,7 +70,12 @@ class Person
      */
     private $image;
 
-    public function getId(): ?int
+    public function setId(String $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -102,16 +108,6 @@ class Person
     public function getDescription(): ?string
     {
         return $this->description;
-    }
-
-    public function setIdentifier(?string $identifier): void
-    {
-        $this->identifier = $identifier;
-    }
-
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
     }
 
     public function setName(?string $name): void
