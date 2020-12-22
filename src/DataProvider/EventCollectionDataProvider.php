@@ -7,6 +7,7 @@ use App\Entity\Event;
 use App\Entity\Place;
 use App\Entity\Organization;
 use App\Entity\Person;
+use App\Entity\PostalAddress;
 use App\Entity\Internal\Edition;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -56,12 +57,18 @@ final class EventCollectionDataProvider implements ContextAwareCollectionDataPro
             $place->setName($location->getName());
             $place->setDescription($location->getDescription());
             $place->setImage($location->getLogo());
+            $address = new PostalAddress();
+            $address->setId($location->getId());
+            $address->setStreetAddress($location->getAddress1() . ' ' . $location->getAddress2());
+            $address->setPostalCode($location->getPostalCode());
+            $address->setAddressLocality($location->getCity());
+            $place->setAddress($address);
             $event->setLocation($place);
             $organizer = $edition->getOrganizer();
             $category = $edition->getCategory();
             $organization = new Organization();
             $organization->setId($organizer->getSlug());
-            $organization->setName($category->getDescription());
+            $organization->setName($category->getLabel() . ' - ' . $category->getDescription());
             $organization->setDescription($organizer->getDescription());
             $organization->setImage($organizer->getLogo());
             $event->setOrganizer($organization);
@@ -74,6 +81,7 @@ final class EventCollectionDataProvider implements ContextAwareCollectionDataPro
                 $subEvent->setName($talk->getTitle());
                 $subEvent->setDescription($talk->getShortDescription());
                 $subEvent->setDuration($talk->getType()->getDurationInMinutes() . 'M');
+                $subEvent->setEventAttendanceMode($edition->getMode()->getLabel());
                 $speakers = $talk->getSpeakers();
                 if ($speakers && count($speakers)) {
                     foreach ($speakers as $speaker) {

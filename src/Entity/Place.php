@@ -7,6 +7,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Entities that have a somewhat fixed, physical extension.
@@ -15,7 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(iri="http://schema.org/Place",
  *      collectionOperations={"get"},
- *      itemOperations={"get"}
+ *      itemOperations={"get"},
+ *      normalizationContext={"groups"={"place"}},
+ *      denormalizationContext={"groups"={"place"}}
  * )
  */
 class Place
@@ -30,6 +33,7 @@ class Place
      * @var string|null the name of the item
      *
      * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"event", "place"})
      */
     private $name;
 
@@ -37,6 +41,7 @@ class Place
      * @var string|null a description of the item
      *
      * @ApiProperty(iri="http://schema.org/description")
+     * @Groups({"event", "place"})
      */
     private $description;
 
@@ -44,6 +49,7 @@ class Place
      * @var PostalAddress|null physical address of the item
      *
      * @ApiProperty(iri="http://schema.org/address")
+     * @Groups({"event", "place"})
      */
     private $address;
 
@@ -93,15 +99,15 @@ class Place
         return $this->description;
     }
 
-    /* public function setAddress(?PostalAddress $address): void */
-    /* { */
-    /*     $this->address = $address; */
-    /* } */
+    public function setAddress(?PostalAddress $address): void
+    {
+        $this->address = $address;
+    }
 
-    /* public function getAddress(): ?PostalAddress */
-    /* { */
-    /*     return $this->address; */
-    /* } */
+    public function getAddress(): ?PostalAddress
+    {
+        return $this->address;
+    }
 
     /* public function setIdentifier(?string $identifier): void */
     /* { */

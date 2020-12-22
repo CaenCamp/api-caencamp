@@ -7,6 +7,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the \[\[offers\]\] property. Repeated events may be structured as separate Event objects.
@@ -15,7 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(iri="http://schema.org/Event",
  *      collectionOperations={"get"},
- *      itemOperations={"get"}
+ *      itemOperations={"get"},
+ *      normalizationContext={"groups"={"event"}},
+ *      denormalizationContext={"groups"={"event"}}
  * )
  */
 class Event
@@ -32,6 +35,7 @@ class Event
      *
      * @ApiProperty(iri="http://schema.org/startDate")
      * @Assert\DateTime
+     * @Groups({"event"})
      */
     private $startDate;
 
@@ -47,6 +51,7 @@ class Event
      * @var string|null The duration of the event. (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601#/Durations)).
      * @ApiProperty(iri="https://schema.org/duration")
      * @Assert\DateTime
+     * @Groups({"event"})
      */
     private $duration;
 
@@ -61,6 +66,7 @@ class Event
      * @var string|null The mode of attendance (offline / online / both)
      * @ApiProperty(iri="https://schema.org/eventAttendanceMode")
      * this schema.org property is not integrated yet, this is a manual implementation
+     * @Groups({"event"})
      */
     private $eventAttendanceMode;
 
@@ -68,6 +74,7 @@ class Event
      * @var Place|null the location of for example where the event is happening, an organization is located, or where an action takes place
      *
      * @ApiProperty(iri="http://schema.org/location")
+     * @Groups({"event"})
      */
     private $location;
 
@@ -75,6 +82,7 @@ class Event
      * @var Organization|null an organizer of an Event
      *
      * @ApiProperty(iri="http://schema.org/organizer")
+     * @Groups({"event"})
      */
     private $organizer;
 
@@ -89,6 +97,7 @@ class Event
      * @var Person[]|null a performer at the event—for example, a presenter, musician, musical group or actor
      *
      * @ApiProperty(iri="http://schema.org/performers")
+     * @Groups({"event"})
      */
     private $performers;
 
@@ -103,6 +112,7 @@ class Event
      * @var Event[]|null An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.
      *
      * @ApiProperty(iri="http://schema.org/subEvents")
+     * @Groups({"event"})
      */
     private $subEvents;
 
@@ -117,6 +127,7 @@ class Event
      * @var string|null a description of the item
      *
      * @ApiProperty(iri="http://schema.org/description")
+     * @Groups({"event"})
      */
     private $description;
 
@@ -140,6 +151,7 @@ class Event
      * @var string|null the name of the item
      *
      * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"event"})
      */
     private $name;
 

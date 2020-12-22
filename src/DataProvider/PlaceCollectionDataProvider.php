@@ -4,6 +4,7 @@ namespace App\DataProvider;
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use App\Entity\Place;
+use App\Entity\PostalAddress;
 use App\Entity\Internal\Place as Location;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -44,6 +45,12 @@ final class PlaceCollectionDataProvider implements ContextAwareCollectionDataPro
             $place->setName($location->getName());
             $place->setDescription($location->getDescription());
             $place->setImage($location->getLogo());
+            $address = new PostalAddress();
+            $address->setId($location->getId());
+            $address->setStreetAddress($location->getAddress1() . ' ' . $location->getAddress2());
+            $address->setPostalCode($location->getPostalCode());
+            $address->setAddressLocality($location->getCity());
+            $place->setAddress($address);
             $collection[] = $place;
         }
 

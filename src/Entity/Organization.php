@@ -7,6 +7,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * An organization such as a school, NGO, corporation, club, etc.
@@ -38,6 +39,7 @@ class Organization
      * @var string|null a description of the item
      *
      * @ApiProperty(iri="http://schema.org/description")
+     * @Groups({"event"})
      */
     private $description;
 
@@ -54,6 +56,7 @@ class Organization
      *
      * @ApiProperty(iri="http://schema.org/image")
      * @Assert\Url
+     * @Groups({"event"})
      */
     private $image;
 
@@ -61,6 +64,7 @@ class Organization
      * @var string|null the name of the item
      *
      * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"event"})
      */
     private $name;
 
