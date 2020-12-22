@@ -7,6 +7,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the \[\[offers\]\] property. Repeated events may be structured as separate Event objects.
@@ -15,14 +16,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(iri="http://schema.org/Event",
  *      collectionOperations={"get"},
- *      itemOperations={"get"}
+ *      itemOperations={"get"},
+ *      normalizationContext={"groups"={"event"}},
+ *      denormalizationContext={"groups"={"event"}}
  * )
  */
 class Event
 {
 
     /**
-     * @var int|null
+     * @var string|null
+     * @ApiProperty(identifier=true)
      */
     private $id;
 
@@ -31,6 +35,7 @@ class Event
      *
      * @ApiProperty(iri="http://schema.org/startDate")
      * @Assert\DateTime
+     * @Groups({"event"})
      */
     private $startDate;
 
@@ -43,16 +48,25 @@ class Event
     private $endDate;
 
     /**
-     * @var \DateTimeInterface|null The duration of the event. (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601#/Durations)).
+     * @var string|null The duration of the event. (in \[ISO 8601 date format\](http://en.wikipedia.org/wiki/ISO\_8601#/Durations)).
      * @ApiProperty(iri="https://schema.org/duration")
      * @Assert\DateTime
+     * @Groups({"event"})
      */
     private $duration;
+
+    /**
+     * @var string|null an eventStatus of an event represents its status; particularly useful when an event is cancelled or rescheduled
+     *
+     * @ApiProperty(iri="http://schema.org/eventStatus")
+     */
+    private $eventStatus;
 
     /**
      * @var string|null The mode of attendance (offline / online / both)
      * @ApiProperty(iri="https://schema.org/eventAttendanceMode")
      * this schema.org property is not integrated yet, this is a manual implementation
+     * @Groups({"event"})
      */
     private $eventAttendanceMode;
 
@@ -60,6 +74,7 @@ class Event
      * @var Place|null the location of for example where the event is happening, an organization is located, or where an action takes place
      *
      * @ApiProperty(iri="http://schema.org/location")
+     * @Groups({"event"})
      */
     private $location;
 
@@ -67,15 +82,24 @@ class Event
      * @var Organization|null an organizer of an Event
      *
      * @ApiProperty(iri="http://schema.org/organizer")
+     * @Groups({"event"})
      */
     private $organizer;
 
     /**
-     * @var Person|null a performer at the event—for example, a presenter, musician, musical group or actor
+     * @var Organization|null A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.
      *
-     * @ApiProperty(iri="http://schema.org/performer")
+     * @ApiProperty(iri="http://schema.org/sponsor")
      */
-    private $performer;
+    private $sponsor;
+
+    /**
+     * @var Person[]|null a performer at the event—for example, a presenter, musician, musical group or actor
+     *
+     * @ApiProperty(iri="http://schema.org/performers")
+     * @Groups({"event"})
+     */
+    private $performers;
 
     /**
      * @var CreativeWork|null the CreativeWork that captured all or part of this Event
@@ -85,11 +109,12 @@ class Event
     private $recordedIn;
 
     /**
-     * @var Event|null An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.
+     * @var Event[]|null An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.
      *
-     * @ApiProperty(iri="http://schema.org/subEvent")
+     * @ApiProperty(iri="http://schema.org/subEvents")
+     * @Groups({"event"})
      */
-    private $subEvent;
+    private $subEvents;
 
     /**
      * @var Event|null An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.
@@ -99,17 +124,10 @@ class Event
     private $superEvent;
 
     /**
-     * @var string|null An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
-     *
-     * @ApiProperty(iri="http://schema.org/additionalType")
-     * @Assert\Url
-     */
-    private $additionalType;
-
-    /**
      * @var string|null a description of the item
      *
      * @ApiProperty(iri="http://schema.org/description")
+     * @Groups({"event"})
      */
     private $description;
 
@@ -133,10 +151,22 @@ class Event
      * @var string|null the name of the item
      *
      * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"event"})
      */
     private $name;
 
-    public function getId(): ?int
+    public function __construct()
+    {
+        $this->subEvents = array();
+        $this->performers = array();
+    }
+
+    public function setId(String $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -156,19 +186,29 @@ class Event
         $this->endDate = $endDate;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndDate(): ?string
     {
         return $this->endDate;
     }
 
-    public function getDuration(): ?\DateTimeInterface
+    public function getDuration(): ?string
     {
         return $this->duration;
     }
 
-    public function setDuration(?\DateTimeInterface $duration)
+    public function setDuration(?string $duration)
     {
         $this->duration = $duration;
+    }
+
+    public function setEventStatus(?string $eventStatus): void
+    {
+        $this->eventStatus = $eventStatus;
+    }
+
+    public function getEventStatus(): ?string
+    {
+        return $this->eventStatus;
     }
 
     public function getEventAttendanceMode(): string
@@ -201,14 +241,31 @@ class Event
         return $this->organizer;
     }
 
-    public function setPerformer(?Person $performer): void
+    public function setSponsor(?Organization $sponsor): void
     {
-        $this->performer = $performer;
+        $this->sponsor = $sponsor;
     }
 
-    public function getPerformer(): ?Person
+    public function getSponsor(): ?Organization
     {
-        return $this->performer;
+        return $this->sponsor;
+    }
+
+    public function addPerformer(?Person $performer): self
+    {
+        $this->performers[] = $performer;
+
+        return $this;
+    }
+
+    public function setPerformers(?array $performers): void
+    {
+        $this->performers = $performers;
+    }
+
+    public function getPerformers(): ?iterable
+    {
+        return $this->performers;
     }
 
     public function setRecordedIn(?CreativeWork $recordedIn): void
@@ -221,14 +278,16 @@ class Event
         return $this->recordedIn;
     }
 
-    public function setSubEvent(?Event $subEvent): void
+    public function addSubEvent(?Event $subEvent): self
     {
-        $this->subEvent = $subEvent;
+        $this->subEvents[] = $subEvent;
+
+        return $this;
     }
 
-    public function getSubEvent(): ?Event
+    public function getSubEvents(): ?iterable
     {
-        return $this->subEvent;
+        return $this->subEvents;
     }
 
     public function setSuperEvent(?Event $superEvent): void
@@ -241,16 +300,6 @@ class Event
         return $this->superEvent;
     }
 
-    public function setAdditionalType(?string $additionalType): void
-    {
-        $this->additionalType = $additionalType;
-    }
-
-    public function getAdditionalType(): ?string
-    {
-        return $this->additionalType;
-    }
-
     public function setDescription(?string $description): void
     {
         $this->description = $description;
@@ -259,16 +308,6 @@ class Event
     public function getDescription(): ?string
     {
         return $this->description;
-    }
-
-    public function setIdentifier(?string $identifier): void
-    {
-        $this->identifier = $identifier;
-    }
-
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
     }
 
     public function setImage(?string $image): void

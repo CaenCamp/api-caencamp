@@ -7,6 +7,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * A person (alive, dead, undead, or fictional).
@@ -14,14 +15,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @see http://schema.org/Person Documentation on Schema.org
  *
  * @ApiResource(iri="http://schema.org/Person",
- *      collectionOperations={"get"},
+ *      collectionOperations={},
  *      itemOperations={"get"}
  * )
  */
 class Person
 {
     /**
-     * @var int|null
+     * @var string|null
+     * @ApiProperty(identifier=true)
      */
     private $id;
 
@@ -43,6 +45,7 @@ class Person
      * @var string|null a description of the item
      *
      * @ApiProperty(iri="http://schema.org/description")
+     * @Groups({"event"})
      */
     private $description;
 
@@ -58,6 +61,7 @@ class Person
      * @var string|null the name of the item
      *
      * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"event"})
      */
     private $name;
 
@@ -69,7 +73,12 @@ class Person
      */
     private $image;
 
-    public function getId(): ?int
+    public function setId(String $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -102,16 +111,6 @@ class Person
     public function getDescription(): ?string
     {
         return $this->description;
-    }
-
-    public function setIdentifier(?string $identifier): void
-    {
-        $this->identifier = $identifier;
-    }
-
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
     }
 
     public function setName(?string $name): void

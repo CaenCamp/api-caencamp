@@ -7,6 +7,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Entities that have a somewhat fixed, physical extension.
@@ -15,13 +16,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(iri="http://schema.org/Place",
  *      collectionOperations={"get"},
- *      itemOperations={"get"}
+ *      itemOperations={"get"},
+ *      normalizationContext={"groups"={"place"}},
+ *      denormalizationContext={"groups"={"place"}}
  * )
  */
 class Place
 {
     /**
-     * @var int|null
+     * @var string|null
+     * @ApiProperty(identifier=true)
      */
     private $id;
 
@@ -29,6 +33,7 @@ class Place
      * @var string|null the name of the item
      *
      * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"event", "place"})
      */
     private $name;
 
@@ -36,6 +41,7 @@ class Place
      * @var string|null a description of the item
      *
      * @ApiProperty(iri="http://schema.org/description")
+     * @Groups({"event", "place"})
      */
     private $description;
 
@@ -43,6 +49,7 @@ class Place
      * @var PostalAddress|null physical address of the item
      *
      * @ApiProperty(iri="http://schema.org/address")
+     * @Groups({"event", "place"})
      */
     private $address;
 
@@ -62,7 +69,12 @@ class Place
      */
     private $image;
 
-    public function getId(): ?int
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -97,15 +109,15 @@ class Place
         return $this->address;
     }
 
-    public function setIdentifier(?string $identifier): void
-    {
-        $this->identifier = $identifier;
-    }
+    /* public function setIdentifier(?string $identifier): void */
+    /* { */
+    /*     $this->identifier = $identifier; */
+    /* } */
 
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
-    }
+    /* public function getIdentifier(): ?string */
+    /* { */
+    /*     return $this->identifier; */
+    /* } */
 
     public function setImage(?string $image): void
     {

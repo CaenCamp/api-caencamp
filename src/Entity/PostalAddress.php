@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * The mailing address.
@@ -13,7 +14,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  * @see http://schema.org/PostalAddress Documentation on Schema.org
  *
  * @ApiResource(iri="http://schema.org/PostalAddress", 
- *      collectionOperations={"get"},
+ *      collectionOperations={},
  *      itemOperations={"get"}
  * )
  */
@@ -21,6 +22,7 @@ class PostalAddress
 {
     /**
      * @var int|null
+     * @ApiProperty(identifier=true)
      */
     private $id;
 
@@ -28,6 +30,7 @@ class PostalAddress
      * @var string|null The street address. For example, 1600 Amphitheatre Pkwy.
      *
      * @ApiProperty(iri="http://schema.org/streetAddress")
+     * @Groups({"event", "place"})
      */
     private $streetAddress;
 
@@ -35,6 +38,7 @@ class PostalAddress
      * @var string|null The postal code. For example, 94043.
      *
      * @ApiProperty(iri="http://schema.org/postalCode")
+     * @Groups({"event", "place"})
      */
     private $postalCode;
 
@@ -42,6 +46,7 @@ class PostalAddress
      * @var string|null The locality. For example, Mountain View.
      *
      * @ApiProperty(iri="http://schema.org/addressLocality")
+     * @Groups({"event", "place"})
      */
     private $addressLocality;
 
@@ -55,6 +60,11 @@ class PostalAddress
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function setStreetAddress(?string $streetAddress): void

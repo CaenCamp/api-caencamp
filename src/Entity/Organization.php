@@ -7,6 +7,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * An organization such as a school, NGO, corporation, club, etc.
@@ -15,13 +16,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(iri="http://schema.org/Organization",
  *      collectionOperations={"get"},
- *      itemOperations={"get"}
+ *      itemOperations={"get"},
+ *      attributes={"pagination_items_per_page"=20, "maximum_items_per_page"=50}
  * )
  */
 class Organization
 {
     /**
-     * @var int|null
+     * @var string|null
+     * @ApiProperty(identifier=true)
      */
     private $id;
 
@@ -36,6 +39,7 @@ class Organization
      * @var string|null a description of the item
      *
      * @ApiProperty(iri="http://schema.org/description")
+     * @Groups({"event"})
      */
     private $description;
 
@@ -52,6 +56,7 @@ class Organization
      *
      * @ApiProperty(iri="http://schema.org/image")
      * @Assert\Url
+     * @Groups({"event"})
      */
     private $image;
 
@@ -59,23 +64,29 @@ class Organization
      * @var string|null the name of the item
      *
      * @ApiProperty(iri="http://schema.org/name")
+     * @Groups({"event"})
      */
     private $name;
 
-    public function getId(): ?int
+    public function setId(String $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setMemberOf(?Organization $memberOf): void
-    {
-        $this->memberOf = $memberOf;
-    }
+    /* public function setMemberOf(?Organization $memberOf): void */
+    /* { */
+    /*     $this->memberOf = $memberOf; */
+    /* } */
 
-    public function getMemberOf(): ?Organization
-    {
-        return $this->memberOf;
-    }
+    /* public function getMemberOf(): ?Organization */
+    /* { */
+    /*     return $this->memberOf; */
+    /* } */
 
     public function setDescription(?string $description): void
     {
@@ -87,15 +98,15 @@ class Organization
         return $this->description;
     }
 
-    public function setIdentifier(?string $identifier): void
-    {
-        $this->identifier = $identifier;
-    }
+    /* public function setIdentifier(?string $identifier): void */
+    /* { */
+    /*     $this->identifier = $identifier; */
+    /* } */
 
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
-    }
+    /* public function getIdentifier(): ?string */
+    /* { */
+    /*     return $this->identifier; */
+    /* } */
 
     public function setImage(?string $image): void
     {
