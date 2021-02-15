@@ -13,20 +13,21 @@ $dotenv = new Dotenv();
 $dotenv->loadEnv(__DIR__.'/.env.local');
 
 // Le nom de votre projet
-set('application', 'api-cc');
+set('application', 'api-caencamp');
 
 // Hosts
 host('caencamp')
+    ->forwardAgent()
     /* ->port($_ENV['DEPLOYER_REPO_PORT']) */
     /* ->hostname($_ENV['DEPLOYER_REPO_HOSTNAME']) */
-    ->set('deploy_path', '/var/www/{{application}}')
+    ->set('deploy_path', '/home/php-app/{{application}}')
     ;
 
 // Nombre de déploiements à conserver avant de les supprimer.
 set('keep_releases', 4);
 
 // Votre repo
-set('repository', $_ENV['DEPLOYER_REPO_URL']);
+set('repository', 'git@github.com:CaenCamp/api-caencamp.git');
 
 set('bin_dir', 'bin');
 
