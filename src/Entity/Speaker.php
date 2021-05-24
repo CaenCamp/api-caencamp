@@ -8,47 +8,61 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SpeakerRepository::class)
  */
+#[ApiResource(
+    collectionOperations: ['get'],
+    itemOperations: ['get'],
+    normalizationContext: ['groups' => ['public-speaker']],
+    denormalizationContext: ['groups' => ['admin-speaker']],
+)]
 class Speaker
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"public-speaker"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"public-speaker"})
      */
     private $name;
 
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=255,unique=true)
+     * @Groups({"public-speaker"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string", length=400, nullable=true)
+     * @Groups({"public-speaker"})
      */
     private $short_biography;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"public-speaker"})
      */
     private $biography;
 
     /**
      * @ORM\OneToMany(targetEntity=WebSite::class, mappedBy="speaker")
+     * @Groups({"public-speaker"})
      */
     private $WebSites;
 
     /**
      * @ORM\ManyToMany(targetEntity=Talk::class, mappedBy="Speakers")
+     * @Groups({"public-speaker"})
      */
     private $talks;
 

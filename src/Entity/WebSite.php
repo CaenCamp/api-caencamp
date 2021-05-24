@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\WebSiteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=WebSiteRepository::class)
@@ -20,12 +21,14 @@ class WebSite
 
     /**
      * @ORM\Column(type="string", length=500)
+     * @Groups({"public-speaker"})
      */
     private $url;
 
     /**
      * @ORM\ManyToOne(targetEntity=WebSiteType::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"public-speaker"})
      */
     private $type;
 

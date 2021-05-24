@@ -7,6 +7,7 @@ use App\Repository\EditionCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EditionCategoryRepository::class)
@@ -22,11 +23,13 @@ class EditionCategory
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"public-speaker"})
      */
     private $label;
 
     /**
      * @ORM\Column(type="string", length=350, nullable=true)
+     * @Groups({"public-speaker"})
      */
     private $description;
 

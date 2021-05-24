@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TalkRepository::class)
@@ -18,32 +19,38 @@ class Talk
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"public-speaker"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"public-speaker"})
      */
     private $title;
 
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255,unique=true)
+     * @Groups({"public-speaker"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"public-speaker"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=500)
+     * @Groups({"public-speaker"})
      */
     private $short_description;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups({"public-speaker"})
      */
     private $video;
 
@@ -55,6 +62,7 @@ class Talk
     /**
      * @ORM\ManyToOne(targetEntity=TalkType::class, inversedBy="talks")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"public-speaker"})
      */
     private $Type;
 
@@ -66,6 +74,7 @@ class Talk
     /**
      * @ORM\ManyToOne(targetEntity=Edition::class, inversedBy="talks")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"public-speaker"})
      */
     private $Edition;
 

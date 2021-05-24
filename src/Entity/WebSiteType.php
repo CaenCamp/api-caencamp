@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\WebSiteTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=WebSiteTypeRepository::class)
@@ -20,6 +21,7 @@ class WebSiteType
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"public-speaker"})
      */
     private $label;
 

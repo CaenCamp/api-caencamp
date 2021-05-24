@@ -7,6 +7,7 @@ use App\Repository\TalkTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TalkTypeRepository::class)
@@ -22,11 +23,13 @@ class TalkType
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"public-speaker"})
      */
     private $label;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups({"public-speaker"})
      */
     private $description;
 
@@ -37,6 +40,7 @@ class TalkType
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"public-speaker"})
      */
     private $duration_in_minutes;
 

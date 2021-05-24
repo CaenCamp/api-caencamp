@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EditionModeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EditionModeRepository::class)
@@ -20,6 +21,7 @@ class EditionMode
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"public-speaker"})
      */
     private $label;
 

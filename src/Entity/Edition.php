@@ -8,11 +8,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EditionRepository::class)
  */
-#[ApiResource]
 class Edition
 {
     /**
@@ -24,22 +24,26 @@ class Edition
 
     /**
      * @ORM\Column(type="string", length=350)
+     * @Groups({"public-speaker"})
      */
     private $title;
 
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=350,unique=true)
+     * @Groups({"public-speaker"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups({"public-speaker"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=400)
+     * @Groups({"public-speaker"})
      */
     private $ShortDescription;
 
@@ -51,12 +55,14 @@ class Edition
     /**
      * @ORM\ManyToOne(targetEntity=EditionCategory::class, inversedBy="editions")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"public-speaker"})
      */
     private $Category;
 
     /**
      * @ORM\ManyToOne(targetEntity=EditionMode::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"public-speaker"})
      */
     private $Mode;
 
