@@ -2,7 +2,7 @@ api_platform:
   description: "API publique du contenu des CaenCamp"
   version: "0.9.0"
   mapping:
-    paths: ["%kernel.project_dir%/src/Entity"]
+    paths: ["%kernel.project_dir%/src/Entity/Internal"] # "%kernel.project_dir%/src/Entity", 
   patch_formats:
     json: ["application/merge-patch+json"]
   swagger:

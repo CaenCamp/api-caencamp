@@ -2,6 +2,7 @@
 
 namespace App\Entity\Internal;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\Internal\EditionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=EditionRepository::class)
+ * @ApiResource()
  */
 class Edition
 {

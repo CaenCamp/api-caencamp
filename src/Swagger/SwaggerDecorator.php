@@ -20,9 +20,9 @@ final class SwaggerDecorator implements NormalizerInterface
 
         // If a prefix is configured on API Platform's routes, it must appear here.
         /* unset($docs['paths']['/api/creative_works']); */
-        unset($docs['paths']['/api/creative_works/{id}']);
-        unset($docs['paths']['/api/people/{id}']);
-        unset($docs['paths']['/api/postal_addresses/{id}']);
+        // unset($docs['paths']['/api/creative_works/{id}']);
+        // unset($docs['paths']['/api/people/{id}']);
+        // unset($docs['paths']['/api/postal_addresses/{id}']);
 
         // Override title
         $docs['info']['title'] = 'CaenCamp API';
