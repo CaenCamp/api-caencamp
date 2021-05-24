@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity\Internal;
+namespace App\Entity;
 
-use App\Repository\Internal\TagRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

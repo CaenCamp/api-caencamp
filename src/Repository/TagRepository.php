@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\Internal;
+namespace App\Repository;
 
-use App\Entity\Internal\Tag;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

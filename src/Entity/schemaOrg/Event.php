@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Entity\schemaOrg;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *
  * @see http://schema.org/Event Documentation on Schema.org
  *
- * @ApiResource(iri="http://schema.org/Event",
+ * ApiResource(iri="http://schema.org/Event",
  *      collectionOperations={"get"},
  *      itemOperations={"get"},
  *      normalizationContext={"groups"={"event"}},

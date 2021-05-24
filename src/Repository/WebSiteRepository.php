@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Repository\Internal;
+namespace App\Repository;
 
-use App\Entity\Internal\WebSiteType;
+use App\Entity\WebSite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method WebSiteType|null find($id, $lockMode = null, $lockVersion = null)
- * @method WebSiteType|null findOneBy(array $criteria, array $orderBy = null)
- * @method WebSiteType[]    findAll()
- * @method WebSiteType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method WebSite|null find($id, $lockMode = null, $lockVersion = null)
+ * @method WebSite|null findOneBy(array $criteria, array $orderBy = null)
+ * @method WebSite[]    findAll()
+ * @method WebSite[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class WebSiteTypeRepository extends ServiceEntityRepository
+class WebSiteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, WebSiteType::class);
+        parent::__construct($registry, WebSite::class);
     }
 
     // /**
-    //  * @return WebSiteType[] Returns an array of WebSiteType objects
+    //  * @return WebSite[] Returns an array of WebSite objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class WebSiteTypeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?WebSiteType
+    public function findOneBySomeField($value): ?WebSite
     {
         return $this->createQueryBuilder('w')
             ->andWhere('w.exampleField = :val')

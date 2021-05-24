@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Entity\schemaOrg;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *
  * @see http://schema.org/PostalAddress Documentation on Schema.org
  *
- * @ApiResource(iri="http://schema.org/PostalAddress", 
+ * ApiResource(iri="http://schema.org/PostalAddress", 
  *      collectionOperations={},
  *      itemOperations={"get"}
  * )

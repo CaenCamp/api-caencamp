@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Internal\Speaker;
-use App\Entity\Internal\WebSite;
+use App\Entityd\Speaker;
+use App\Entityd\WebSite;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Mni\FrontYAML\Parser;

@@ -4,8 +4,8 @@ namespace App\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use App\Entity\Organization;
-use App\Entity\Internal\Organization as Enterprise;
+use App\Entity\schemaOrg\Organization;
+use App\Entity\Organization as Enterprise;
 use Doctrine\Persistence\ManagerRegistry;
 
 final class OrganizationItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity\Internal;
+namespace App\Entity;
 
-use App\Repository\Internal\EditionCategoryRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\EditionCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

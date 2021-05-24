@@ -1,96 +1,105 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\OrganizationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * An organization such as a school, NGO, corporation, club, etc.
- *
- * @see http://schema.org/Organization Documentation on Schema.org
- *
- * @ApiResource(iri="http://schema.org/Organization",
- *      collectionOperations={"get"},
- *      itemOperations={"get"},
- *      attributes={"pagination_items_per_page"=20, "maximum_items_per_page"=50}
- * )
+ * @ORM\Entity(repositoryClass=OrganizationRepository::class)
  */
 class Organization
 {
     /**
-     * @var string|null
-     * @ApiProperty(identifier=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var Organization|null an Organization (or ProgramMembership) to which this Person or Organization belongs
-     *
-     * @ApiProperty(iri="http://schema.org/memberOf")
+     * @ORM\Column(type="string", length=255)
      */
-    private $memberOf;
+    private $name;
 
     /**
-     * @var string|null a description of the item
-     *
-     * @ApiProperty(iri="http://schema.org/description")
-     * @Groups({"event"})
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255,unique=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @var string|null The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.
-     *
-     * @ApiProperty(iri="http://schema.org/identifier")
-     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $identifier;
+    private $url;
 
     /**
-     * @var string|null An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].
-     *
-     * @ApiProperty(iri="http://schema.org/image")
-     * @Assert\Url
-     * @Groups({"event"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $image;
+    private $logo;
 
     /**
-     * @var string|null the name of the item
-     *
-     * @ApiProperty(iri="http://schema.org/name")
-     * @Groups({"event"})
+     * @ORM\OneToMany(targetEntity=Edition::class, mappedBy="Sponsor")
      */
-    private $name;
+    private $sponsorings;
 
-    public function setId(String $id): void
+    /**
+     * @ORM\OneToMany(targetEntity=Edition::class, mappedBy="Organizer")
+     */
+    private $editions;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_html;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_markdown;
+
+    public function __construct()
     {
-        $this->id = $id;
+        $this->editions = new ArrayCollection();
+        $this->sponsorings = new ArrayCollection();
     }
 
-    public function getId(): ?string
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /* public function setMemberOf(?Organization $memberOf): void */
-    /* { */
-    /*     $this->memberOf = $memberOf; */
-    /* } */
-
-    /* public function getMemberOf(): ?Organization */
-    /* { */
-    /*     return $this->memberOf; */
-    /* } */
-
-    public function setDescription(?string $description): void
+    public function getName(): ?string
     {
-        $this->description = $description;
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -98,33 +107,118 @@ class Organization
         return $this->description;
     }
 
-    /* public function setIdentifier(?string $identifier): void */
-    /* { */
-    /*     $this->identifier = $identifier; */
-    /* } */
-
-    /* public function getIdentifier(): ?string */
-    /* { */
-    /*     return $this->identifier; */
-    /* } */
-
-    public function setImage(?string $image): void
+    public function setDescription(?string $description): self
     {
-        $this->image = $image;
+        $this->description = $description;
+
+        return $this;
     }
 
-    public function getImage(): ?string
+    public function getUrl(): ?string
     {
-        return $this->image;
+        return $this->url;
     }
 
-    public function setName(?string $name): void
+    public function setUrl(?string $url): self
     {
-        $this->name = $name;
+        $this->url = $url;
+
+        return $this;
     }
 
-    public function getName(): ?string
+    public function getLogo(): ?string
     {
-        return $this->name;
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Edition[]
+     */
+    public function getSponsorings(): Collection
+    {
+        return $this->sponsorings;
+    }
+
+    public function addSponsoring(Edition $sponsoring): self
+    {
+        if (!$this->sponsorings->contains($sponsoring)) {
+            $this->sponsorings[] = $sponsoring;
+            $sponsoring->setSponsor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSponsoring(Edition $sponsoring): self
+    {
+        if ($this->sponsorings->removeElement($sponsoring)) {
+            // set the owning side to null (unless already changed)
+            if ($sponsoring->getSponsor() === $this) {
+                $sponsoring->setSponsor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Edition[]
+     */
+    public function getEditions(): Collection
+    {
+        return $this->editions;
+    }
+
+    public function addEdition(Edition $edition): self
+    {
+        if (!$this->editions->contains($edition)) {
+            $this->editions[] = $edition;
+            $edition->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEdition(Edition $edition): self
+    {
+        if ($this->editions->removeElement($edition)) {
+            // set the owning side to null (unless already changed)
+            if ($edition->getOrganizer() === $this) {
+                $edition->setOrganizer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDescriptionHtml(): ?string
+    {
+        return $this->description_html;
+    }
+
+    public function setDescriptionHtml(?string $description_html): self
+    {
+        $this->description_html = $description_html;
+
+        return $this;
+    }
+
+    public function getDescriptionMarkdown(): ?string
+    {
+        return $this->description_markdown;
+    }
+
+    public function setDescriptionMarkdown(?string $description_markdown): self
+    {
+        $this->description_markdown = $description_markdown;
+
+        return $this;
     }
 }

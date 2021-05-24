@@ -3,12 +3,12 @@ namespace App\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use App\Entity\Event;
-use App\Entity\Place;
-use App\Entity\Organization;
-use App\Entity\Person;
-use App\Entity\PostalAddress;
-use App\Entity\Internal\Edition;
+use App\Entity\schemaOrg\Event;
+use App\Entity\schemaOrg\Place;
+use App\Entity\schemaOrg\Organization;
+use App\Entity\schemaOrg\Person;
+use App\Entity\schemaOrg\PostalAddress;
+use App\Entity\Edition;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 

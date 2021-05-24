@@ -3,9 +3,9 @@ namespace App\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use App\Entity\Place;
-use App\Entity\PostalAddress;
-use App\Entity\Internal\Place as Location;
+use App\Entity\schemaOrg\Place;
+use App\Entity\schemaOrg\PostalAddress;
+use App\Entity\schemaOrg\Place as Location;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 

@@ -4,9 +4,9 @@ namespace App\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use App\Entity\Place;
-use App\Entity\PostalAddress;
-use App\Entity\Internal\Place as Location;
+use App\Entity\schemaOrg\Place;
+use App\Entity\schemaOrg\PostalAddress;
+use App\Entity\Place as Location;
 use Doctrine\Persistence\ManagerRegistry;
 
 final class PlaceItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface

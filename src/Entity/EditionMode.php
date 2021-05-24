@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Entity\Internal;
+namespace App\Entity;
 
-use App\Repository\Internal\WebSiteTypeRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\EditionModeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=WebSiteTypeRepository::class)
+ * @ORM\Entity(repositoryClass=EditionModeRepository::class)
  */
-class WebSiteType
+class EditionMode
 {
     /**
      * @ORM\Id
@@ -18,7 +19,7 @@ class WebSiteType
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $label;
 

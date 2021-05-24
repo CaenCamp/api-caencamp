@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity\Internal;
+namespace App\Entity;
 
-use App\Repository\Internal\WebSiteRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\WebSiteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

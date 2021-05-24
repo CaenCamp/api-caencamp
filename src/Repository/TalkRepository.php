@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Repository\Internal;
+namespace App\Repository;
 
-use App\Entity\Internal\TalkType;
+use App\Entity\Talk;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method TalkType|null find($id, $lockMode = null, $lockVersion = null)
- * @method TalkType|null findOneBy(array $criteria, array $orderBy = null)
- * @method TalkType[]    findAll()
- * @method TalkType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Talk|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Talk|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Talk[]    findAll()
+ * @method Talk[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TalkTypeRepository extends ServiceEntityRepository
+class TalkRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TalkType::class);
+        parent::__construct($registry, Talk::class);
     }
 
     // /**
-    //  * @return TalkType[] Returns an array of TalkType objects
+    //  * @return Talk[] Returns an array of Talk objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class TalkTypeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?TalkType
+    public function findOneBySomeField($value): ?Talk
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')

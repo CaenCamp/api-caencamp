@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Repository\Internal;
+namespace App\Repository;
 
-use App\Entity\Internal\EditionMode;
+use App\Entity\Edition;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method EditionMode|null find($id, $lockMode = null, $lockVersion = null)
- * @method EditionMode|null findOneBy(array $criteria, array $orderBy = null)
- * @method EditionMode[]    findAll()
- * @method EditionMode[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Edition|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Edition|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Edition[]    findAll()
+ * @method Edition[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EditionModeRepository extends ServiceEntityRepository
+class EditionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, EditionMode::class);
+        parent::__construct($registry, Edition::class);
     }
 
     // /**
-    //  * @return EditionMode[] Returns an array of EditionMode objects
+    //  * @return Edition[] Returns an array of Edition objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EditionModeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?EditionMode
+    public function findOneBySomeField($value): ?Edition
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

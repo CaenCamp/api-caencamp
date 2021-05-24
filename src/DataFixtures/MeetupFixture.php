@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Internal\Edition;
-use App\Entity\Internal\Talk;
+use App\Entity\Edition;
+use App\Entity\Talk;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Mni\FrontYAML\Parser;
@@ -74,13 +74,13 @@ class MeetupFixture extends Fixture implements DependentFixtureInterface
                 $talk->setVideo($yaml['video']);
             }
             foreach ($yaml['tags'] as $tag) {
-                $dbTag = $manager->getRepository('App\Entity\Internal\Tag')->findOneByLabel($tag);
+                $dbTag = $manager->getRepository('App\Entity\Tag')->findOneByLabel($tag);
                 if (!!$dbTag) {
                     $talk->addTag($dbTag);
                 }
             }
             foreach ($yaml['speakers'] as $slug) {
-                $speaker= $manager->getRepository('App\Entity\Internal\Speaker')->findOneBySlug($slug);
+                $speaker= $manager->getRepository('App\Entity\Speaker')->findOneBySlug($slug);
                 if (!!$speaker) {
                     $talk->addSpeaker($speaker);
                 }
@@ -118,20 +118,20 @@ class MeetupFixture extends Fixture implements DependentFixtureInterface
                 $talk->setVideo($yaml['video']);
             }
             foreach ($yaml['tags'] as $tag) {
-                $dbTag = $manager->getRepository('App\Entity\Internal\Tag')->findOneByLabel($tag);
+                $dbTag = $manager->getRepository('App\Entity\Tag')->findOneByLabel($tag);
                 if (!!$dbTag) {
                     $talk->addTag($dbTag);
                 }
             }
             foreach ($yaml['speakers'] as $slug) {
-                $speaker= $manager->getRepository('App\Entity\Internal\Speaker')->findOneBySlug($slug);
+                $speaker= $manager->getRepository('App\Entity\Speaker')->findOneBySlug($slug);
                 if (!!$speaker) {
                     $talk->addSpeaker($speaker);
                 }
             }
             $manager->persist($talk);
 
-            $edition= $manager->getRepository('App\Entity\Internal\Edition')->findOneByNumber($yaml['edition']);
+            $edition= $manager->getRepository('App\Entity\Edition')->findOneByNumber($yaml['edition']);
             if (!!$edition) {
                 $edition->addTalk($talk);
                 $manager->persist($edition);

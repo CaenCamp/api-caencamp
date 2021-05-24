@@ -1,87 +1,100 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\PlaceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Entities that have a somewhat fixed, physical extension.
- *
- * @see http://schema.org/Place Documentation on Schema.org
- *
- * @ApiResource(iri="http://schema.org/Place",
- *      collectionOperations={"get"},
- *      itemOperations={"get"},
- *      normalizationContext={"groups"={"place"}},
- *      denormalizationContext={"groups"={"place"}}
- * )
+ * @ORM\Entity(repositoryClass=PlaceRepository::class)
  */
 class Place
 {
     /**
-     * @var string|null
-     * @ApiProperty(identifier=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string|null the name of the item
-     *
-     * @ApiProperty(iri="http://schema.org/name")
-     * @Groups({"event", "place"})
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @var string|null a description of the item
-     *
-     * @ApiProperty(iri="http://schema.org/description")
-     * @Groups({"event", "place"})
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255,unique=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @var PostalAddress|null physical address of the item
-     *
-     * @ApiProperty(iri="http://schema.org/address")
-     * @Groups({"event", "place"})
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
-    private $address;
+    private $url;
 
     /**
-     * @var string|null The identifier property represents any kind of identifier for any kind of \[\[Thing\]\], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \[background notes\](/docs/datamodel.html#identifierBg) for more details.
-     *
-     * @ApiProperty(iri="http://schema.org/identifier")
-     * @Assert\Url
+     * @ORM\Column(type="string", length=255)
      */
-    private $identifier;
+    private $address1;
 
     /**
-     * @var string|null An image of the item. This can be a \[\[URL\]\] or a fully described \[\[ImageObject\]\].
-     *
-     * @ApiProperty(iri="http://schema.org/image")
-     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $image;
+    private $address2;
 
-    public function setId(string $id): void
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $postal_code;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coutry;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $logo;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Edition::class, mappedBy="Place")
+     */
+    private $editions;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_html;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description_markdown;
+
+    public function __construct()
     {
-        $this->id = $id;
+        $this->editions = new ArrayCollection();
     }
 
-    public function getId(): ?string
+    public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setName(?string $name): void
-    {
-        $this->name = $name;
     }
 
     public function getName(): ?string
@@ -89,9 +102,24 @@ class Place
         return $this->name;
     }
 
-    public function setDescription(?string $description): void
+    public function setName(string $name): self
     {
-        $this->description = $description;
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -99,33 +127,148 @@ class Place
         return $this->description;
     }
 
-    public function setAddress(?PostalAddress $address): void
+    public function setDescription(?string $description): self
     {
-        $this->address = $address;
+        $this->description = $description;
+
+        return $this;
     }
 
-    public function getAddress(): ?PostalAddress
+    public function getUrl(): ?string
     {
-        return $this->address;
+        return $this->url;
     }
 
-    /* public function setIdentifier(?string $identifier): void */
-    /* { */
-    /*     $this->identifier = $identifier; */
-    /* } */
-
-    /* public function getIdentifier(): ?string */
-    /* { */
-    /*     return $this->identifier; */
-    /* } */
-
-    public function setImage(?string $image): void
+    public function setUrl(?string $url): self
     {
-        $this->image = $image;
+        $this->url = $url;
+
+        return $this;
     }
 
-    public function getImage(): ?string
+    public function getAddress1(): ?string
     {
-        return $this->image;
+        return $this->address1;
+    }
+
+    public function setAddress1(string $address1): self
+    {
+        $this->address1 = $address1;
+
+        return $this;
+    }
+
+    public function getAddress2(): ?string
+    {
+        return $this->address2;
+    }
+
+    public function setAddress2(?string $address2): self
+    {
+        $this->address2 = $address2;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postal_code;
+    }
+
+    public function setPostalCode(string $postal_code): self
+    {
+        $this->postal_code = $postal_code;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCoutry(): ?string
+    {
+        return $this->coutry;
+    }
+
+    public function setCoutry(?string $coutry): self
+    {
+        $this->coutry = $coutry;
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Edition[]
+     */
+    public function getEditions(): Collection
+    {
+        return $this->editions;
+    }
+
+    public function addEdition(Edition $edition): self
+    {
+        if (!$this->editions->contains($edition)) {
+            $this->editions[] = $edition;
+            $edition->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEdition(Edition $edition): self
+    {
+        if ($this->editions->removeElement($edition)) {
+            // set the owning side to null (unless already changed)
+            if ($edition->getPlace() === $this) {
+                $edition->setPlace(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDescriptionHtml(): ?string
+    {
+        return $this->description_html;
+    }
+
+    public function setDescriptionHtml(?string $description_html): self
+    {
+        $this->description_html = $description_html;
+
+        return $this;
+    }
+
+    public function getDescriptionMarkdown(): ?string
+    {
+        return $this->description_markdown;
+    }
+
+    public function setDescriptionMarkdown(?string $description_markdown): self
+    {
+        $this->description_markdown = $description_markdown;
+
+        return $this;
     }
 }

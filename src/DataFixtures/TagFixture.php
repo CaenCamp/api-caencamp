@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Internal\Tag;
+use App\Entity\Tag;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Mni\FrontYAML\Parser;

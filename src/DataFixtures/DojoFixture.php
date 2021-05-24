@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Internal\Edition;
-use App\Entity\Internal\Talk;
+use App\Entity\Edition;
+use App\Entity\Talk;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Mni\FrontYAML\Parser;
@@ -55,13 +55,13 @@ class DojoFixture extends Fixture implements DependentFixtureInterface
             $talk->setTitle($yaml['title']);
             $talk->setType($this->getReference(AppFixtures::TT_CODING));
             foreach ($yaml['tags'] as $tag) {
-                $dbTag = $manager->getRepository('App\Entity\Internal\Tag')->findOneByLabel($tag);
+                $dbTag = $manager->getRepository('App\Entity\Tag')->findOneByLabel($tag);
                 if (!!$dbTag) {
                     $talk->addTag($dbTag);
                 }
             }
             foreach ($yaml['craftsmen'] as $slug) {
-                $speaker= $manager->getRepository('App\Entity\Internal\Speaker')->findOneBySlug($slug);
+                $speaker= $manager->getRepository('App\Entity\Speaker')->findOneBySlug($slug);
                 if (!!$speaker) {
                     $talk->addSpeaker($speaker);
                 }

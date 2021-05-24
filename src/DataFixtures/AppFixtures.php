@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Internal\EditionCategory;
-use App\Entity\Internal\EditionMode;
-use App\Entity\Internal\Organization;
-use App\Entity\Internal\Place;
-use App\Entity\Internal\TalkType;
-use App\Entity\Internal\WebSiteType;
+use App\Entity\EditionCategory;
+use App\Entity\EditionMode;
+use App\Entity\Organization;
+use App\Entity\Place;
+use App\Entity\TalkType;
+use App\Entity\WebSiteType;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;

@@ -3,8 +3,8 @@ namespace App\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use App\Entity\Organization;
-use App\Entity\Internal\Organization as Enterprise;
+use App\Entity\schemaOrg\Organization;
+use App\Entity\Organization as Enterprise;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 

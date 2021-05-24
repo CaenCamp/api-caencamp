@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Entity\schemaOrg;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *
  * @see http://schema.org/Person Documentation on Schema.org
  *
- * @ApiResource(iri="http://schema.org/Person",
+ * ApiResource(iri="http://schema.org/Person",
  *      collectionOperations={},
  *      itemOperations={"get"}
  * )
