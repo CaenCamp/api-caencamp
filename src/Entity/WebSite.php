@@ -33,7 +33,7 @@ class WebSite
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Speaker::class, inversedBy="WebSites")
+     * @ORM\ManyToOne(targetEntity=Speaker::class, inversedBy="websites")
      */
     private $speaker;
 

@@ -17,10 +17,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Entity(repositoryClass=SpeakerRepository::class)
  */
 #[ApiResource(
-    collectionOperations: ['get'],
-    itemOperations: ['get'],
+    collectionOperations: ['get', 'post'],
+    itemOperations: ['get', 'put', 'delete'],
     normalizationContext: ['groups' => ['public-speaker']],
-    denormalizationContext: ['groups' => ['admin-speaker']],
 )]
 #[ApiFilter(
     OrderFilter::class,
@@ -58,7 +57,7 @@ class Speaker
      * @ORM\Column(type="string", length=400, nullable=true)
      * @Groups({"public-speaker"})
      */
-    private $short_biography;
+    private $shortbiography;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -70,7 +69,7 @@ class Speaker
      * @ORM\OneToMany(targetEntity=WebSite::class, mappedBy="speaker")
      * @Groups({"public-speaker"})
      */
-    private $WebSites;
+    private $websites;
 
     /**
      * @ORM\ManyToMany(targetEntity=Talk::class, mappedBy="Speakers")
@@ -81,16 +80,16 @@ class Speaker
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $biography_html;
+    private $biographyhtml;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $biography_markdown;
+    private $biographymarkdown;
 
     public function __construct()
     {
-        $this->WebSites = new ArrayCollection();
+        $this->websites = new ArrayCollection();
         $this->talks = new ArrayCollection();
     }
 
@@ -125,14 +124,14 @@ class Speaker
     }
 
 
-    public function getShortBiography(): ?string
+    public function getShortbiography(): ?string
     {
-        return $this->short_biography;
+        return $this->shortbiography;
     }
 
-    public function setShortBiography(?string $short_biography): self
+    public function setShortbiography(?string $shortbiography): self
     {
-        $this->short_biography = $short_biography;
+        $this->shortbiography = $shortbiography;
 
         return $this;
     }
@@ -152,27 +151,27 @@ class Speaker
     /**
      * @return Collection|WebSite[]
      */
-    public function getWebSites(): Collection
+    public function getWebsites(): Collection
     {
-        return $this->WebSites;
+        return $this->websites;
     }
 
-    public function addWebSite(WebSite $webSite): self
+    public function addWebsite(WebSite $website): self
     {
-        if (!$this->WebSites->contains($webSite)) {
-            $this->WebSites[] = $webSite;
-            $webSite->setSpeaker($this);
+        if (!$this->websites->contains($website)) {
+            $this->websites[] = $website;
+            $website->setSpeaker($this);
         }
 
         return $this;
     }
 
-    public function removeWebSite(WebSite $webSite): self
+    public function removeWebsite(WebSite $website): self
     {
-        if ($this->WebSites->removeElement($webSite)) {
+        if ($this->websites->removeElement($website)) {
             // set the owning side to null (unless already changed)
-            if ($webSite->getSpeaker() === $this) {
-                $webSite->setSpeaker(null);
+            if ($website->getSpeaker() === $this) {
+                $website->setSpeaker(null);
             }
         }
 
@@ -206,26 +205,26 @@ class Speaker
         return $this;
     }
 
-    public function getBiographyHtml(): ?string
+    public function getBiographyhtml(): ?string
     {
-        return $this->biography_html;
+        return $this->biographyhtml;
     }
 
-    public function setBiographyHtml(?string $biography_html): self
+    public function setBiographyhtml(?string $biographyhtml): self
     {
-        $this->biography_html = $biography_html;
+        $this->biographyhtml = $biographyhtml;
 
         return $this;
     }
 
-    public function getBiographyMarkdown(): ?string
+    public function getBiographymarkdown(): ?string
     {
-        return $this->biography_markdown;
+        return $this->biographymarkdown;
     }
 
-    public function setBiographyMarkdown(?string $biography_markdown): self
+    public function setBiographymarkdown(?string $biographymarkdown): self
     {
-        $this->biography_markdown = $biography_markdown;
+        $this->biographymarkdown = $biographymarkdown;
 
         return $this;
     }

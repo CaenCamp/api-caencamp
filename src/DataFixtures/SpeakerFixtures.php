@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entityd\Speaker;
-use App\Entityd\WebSite;
+use App\Entity\Speaker;
+use App\Entity\WebSite;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Mni\FrontYAML\Parser;
@@ -29,10 +29,10 @@ class SpeakerFixtures extends Fixture
             $speaker = new Speaker();
             $speaker->setName(trim($yaml['firstName'] . ' ' . $yaml['lastName']));
             $speaker->setSlug($yaml['slug']);
-            $speaker->setShortBiography($yaml['resume']);
+            $speaker->setShortbiography($yaml['resume']);
             $speaker->setBiography($bio);
-            $speaker->setBiographyHtml($html);
-            $speaker->setBiographyMarkdown($markdown);
+            $speaker->setBiographyhtml($html);
+            $speaker->setBiographymarkdown($markdown);
             $websites = $yaml['links'];
             if (is_array($websites)) {
                 for ($j = 0; $j < count($websites); $j++) {
@@ -52,7 +52,7 @@ class SpeakerFixtures extends Fixture
                     }
                     $site->setUrl($websites[$j]['url']);
                     $manager->persist($site);
-                    $speaker->addWebSite($site);
+                    $speaker->addWebsite($site);
                 }
             }
             $manager->persist($speaker);

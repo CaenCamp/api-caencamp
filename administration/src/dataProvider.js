@@ -102,7 +102,11 @@ const getDataProvider = () => ({
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json })),
+            headers: new Headers({ Accept: 'application/json' }),
+        }).then(({ json }) => {
+            console.log('debug update', json)
+            return { data: json };
+        }),
 
     // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
     updateMany: (resource, params) =>
@@ -119,17 +123,23 @@ const getDataProvider = () => ({
         httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({
-            data: { ...params.data, id: json.id },
-        })),
+            headers: new Headers({ Accept: 'application/json' })
+        }).then(({ json }) => {
+            console.log('debug create', json)
+            return {
+                data: { ...params.data, id: json.id },
+            };
+        }),
 
     delete: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'DELETE',
             headers: new Headers({
-                'Content-Type': 'text/plain',
+                'Content-Type': 'application/json',
             }),
-        }).then(({ json }) => ({ data: json })),
+        }).then(({ json }) => {
+            return { data: { id: params.id} };
+        }),
 
     // simple-rest doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
     deleteMany: (resource, params) =>
