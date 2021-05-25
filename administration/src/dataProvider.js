@@ -3,7 +3,7 @@ import { fetchUtils } from 'ra-core';
 
 const httpOptions = { headers: new Headers({ Accept: 'application/ld+json' }) };
 const httpClient = fetchUtils.fetchJson;
-const apiUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8000/api';
+const apiUrl = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8000/api';
 
 /**
  * Maps react-admin queries to a simple REST API
@@ -40,11 +40,13 @@ const apiUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:80
 const getDataProvider = () => ({
     getList: (resource, params) => {
         const { page, perPage } = params.pagination;
-        // const { field, order } = params.sort;
+        const { field, order } = params.sort;
 
         const query = {
             page,
             itemsPerPage: perPage,
+            [`order[${field}]`]: order,
+            ...params.filter,
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
