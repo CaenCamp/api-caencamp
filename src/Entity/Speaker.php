@@ -17,8 +17,15 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Entity(repositoryClass=SpeakerRepository::class)
  */
 #[ApiResource(
-    collectionOperations: ['get', 'post'],
-    itemOperations: ['get', 'put', 'delete'],
+    collectionOperations: [
+        'get',
+        'post' => ['security' => "is_granted('ROLE_ADMIN')"]
+    ],
+    itemOperations: [
+        'get',
+        'put' => ['security' => "is_granted('ROLE_ADMIN')"],
+        'delete' => ['security' => "is_granted('ROLE_ADMIN')"]
+    ],
     normalizationContext: ['groups' => ['public-speaker']],
 )]
 #[ApiFilter(

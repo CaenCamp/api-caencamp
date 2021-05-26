@@ -1,9 +1,18 @@
 import { stringify } from 'query-string';
 import { fetchUtils } from 'ra-core';
 
-const httpOptions = { headers: new Headers({ Accept: 'application/ld+json' }) };
-const httpClient = fetchUtils.fetchJson;
 const apiUrl = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8000/api';
+const httpClient = (url, options = {}) => {
+    if (!options.headers) {
+        options.headers = new Headers({ Accept: 'application/json' });
+    }
+    const storedToken = localStorage.getItem('auth');
+    if (storedToken) {
+        const decodedToken = JSON.parse(storedToken);
+        options.headers.set('Authorization', `Bearer ${decodedToken.token}`);
+    }
+    return fetchUtils.fetchJson(url, options);
+};
 
 /**
  * Maps react-admin queries to a simple REST API
@@ -50,7 +59,9 @@ const getDataProvider = () => ({
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-        return httpClient(url, httpOptions).then(({ json }) => {
+        return httpClient(url, {
+            headers: new Headers({ Accept: 'application/ld+json' }),
+        }).then(({ json }) => {
             return {
                 data: json['hydra:member'],
                 total: json['hydra:totalItems']
@@ -102,9 +113,7 @@ const getDataProvider = () => ({
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify(params.data),
-            headers: new Headers({ Accept: 'application/json' }),
         }).then(({ json }) => {
-            console.log('debug update', json)
             return { data: json };
         }),
 
@@ -123,9 +132,7 @@ const getDataProvider = () => ({
         httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
-            headers: new Headers({ Accept: 'application/json' })
         }).then(({ json }) => {
-            console.log('debug create', json)
             return {
                 data: { ...params.data, id: json.id },
             };
@@ -134,10 +141,7 @@ const getDataProvider = () => ({
     delete: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            }),
-        }).then(({ json }) => {
+        }).then(() => {
             return { data: { id: params.id} };
         }),
 
