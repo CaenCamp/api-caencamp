@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FaceIcon from "@material-ui/icons/Face";
+import SpeakerIcon from '@material-ui/icons/RecordVoiceOver';
 import {
   Datagrid,
   Create,
@@ -119,7 +119,7 @@ export const SpeakerCreate = (props) => (
 );
 
 const speakers = {
-  icon: FaceIcon,
+  icon: SpeakerIcon,
   list: SpeakerList,
   edit: SpeakerEdit,
   create: SpeakerCreate,
