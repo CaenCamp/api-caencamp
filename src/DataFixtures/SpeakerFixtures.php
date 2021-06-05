@@ -29,10 +29,10 @@ class SpeakerFixtures extends Fixture
             $speaker = new Speaker();
             $speaker->setName(trim($yaml['firstName'] . ' ' . $yaml['lastName']));
             $speaker->setSlug($yaml['slug']);
-            $speaker->setShortbiography($yaml['resume']);
+            $speaker->setShortBiography($yaml['resume']);
             $speaker->setBiography($bio);
-            $speaker->setBiographyhtml($html);
-            $speaker->setBiographymarkdown($markdown);
+            $speaker->setBiographyHtml($html);
+            $speaker->setBiographyMarkdown($markdown);
             $websites = $yaml['links'];
             if (is_array($websites)) {
                 for ($j = 0; $j < count($websites); $j++) {
@@ -52,7 +52,7 @@ class SpeakerFixtures extends Fixture
                     }
                     $site->setUrl($websites[$j]['url']);
                     $manager->persist($site);
-                    $speaker->addWebsite($site);
+                    $speaker->addWebSite($site);
                 }
             }
             $manager->persist($speaker);

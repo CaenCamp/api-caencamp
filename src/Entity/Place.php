@@ -106,13 +106,13 @@ class Place
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"public-place"})
      */
-    private $decriptionHtml;
+    private $descriptionHtml;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"public-place"})
      */
-    private $decriptionMarkdown;
+    private $descriptionMarkdown;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -275,26 +275,26 @@ class Place
         return $this;
     }
 
-    public function getDecriptionHtml(): ?string
+    public function getDescriptionHtml(): ?string
     {
-        return $this->decriptionHtml;
+        return $this->descriptionHtml;
     }
 
-    public function setDecriptionHtml(?string $decriptionHtml): self
+    public function setDescriptionHtml(?string $descriptionHtml): self
     {
-        $this->decriptionHtml = $decriptionHtml;
+        $this->descriptionHtml = $descriptionHtml;
 
         return $this;
     }
 
-    public function getDecriptionMarkdown(): ?string
+    public function getDescriptionMarkdown(): ?string
     {
-        return $this->decriptionMarkdown;
+        return $this->descriptionMarkdown;
     }
 
-    public function setDecriptionMarkdown(?string $decriptionMarkdown): self
+    public function setDescriptionMarkdown(?string $descriptionMarkdown): self
     {
-        $this->decriptionMarkdown = $decriptionMarkdown;
+        $this->descriptionMarkdown = $descriptionMarkdown;
 
         return $this;
     }

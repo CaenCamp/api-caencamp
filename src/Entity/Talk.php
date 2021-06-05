@@ -43,12 +43,6 @@ class Talk
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=500)
-     * @Groups({"public-speaker"})
-     */
-    private $short_description;
-
-    /**
      * @ORM\Column(type="string", length=500, nullable=true)
      * @Groups({"public-speaker"})
      */
@@ -79,14 +73,20 @@ class Talk
     private $Edition;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=500)
+     * @Groups({"public-speaker"})
      */
-    private $description_html;
+    private $shortDescription;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description_markdown;
+    private $descriptionHtml;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descriptionMarkdown;
 
     public function __construct()
     {
@@ -138,12 +138,12 @@ class Talk
 
     public function getShortDescription(): ?string
     {
-        return $this->short_description;
+        return $this->shortDescription;
     }
 
-    public function setShortDescription(string $short_description): self
+    public function setShortDescription(string $shortDescription): self
     {
-        $this->short_description = $short_description;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
@@ -234,24 +234,24 @@ class Talk
 
     public function getDescriptionHtml(): ?string
     {
-        return $this->description_html;
+        return $this->descriptionHtml;
     }
 
-    public function setDescriptionHtml(?string $description_html): self
+    public function setDescriptionHtml(?string $descriptionHtml): self
     {
-        $this->description_html = $description_html;
+        $this->descriptionHtml = $descriptionHtml;
 
         return $this;
     }
 
     public function getDescriptionMarkdown(): ?string
     {
-        return $this->description_markdown;
+        return $this->descriptionMarkdown;
     }
 
-    public function setDescriptionMarkdown(?string $description_markdown): self
+    public function setDescriptionMarkdown(?string $descriptionMarkdown): self
     {
-        $this->description_markdown = $description_markdown;
+        $this->descriptionMarkdown = $descriptionMarkdown;
 
         return $this;
     }

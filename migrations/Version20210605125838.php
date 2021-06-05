@@ -10,16 +10,17 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20201220093734 extends AbstractMigration
+final class Version20210605125838 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SEQUENCE admin_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE edition_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE edition_category_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE edition_mode_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
@@ -31,7 +32,10 @@ final class Version20201220093734 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE talk_type_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE web_site_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE web_site_type_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE edition (id INT NOT NULL, category_id INT NOT NULL, mode_id INT NOT NULL, place_id INT DEFAULT NULL, sponsor_id INT DEFAULT NULL, organizer_id INT NOT NULL, title VARCHAR(350) NOT NULL, number SMALLINT NOT NULL, short_description VARCHAR(400) NOT NULL, description TEXT DEFAULT NULL, start_date_time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, end_date_time TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE admin (id INT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_880E0D76E7927C74 ON admin (email)');
+        $this->addSql('CREATE TABLE edition (id INT NOT NULL, category_id INT NOT NULL, mode_id INT NOT NULL, place_id INT DEFAULT NULL, sponsor_id INT DEFAULT NULL, organizer_id INT NOT NULL, title VARCHAR(350) NOT NULL, slug VARCHAR(350) NOT NULL, number SMALLINT NOT NULL, description TEXT DEFAULT NULL, published BOOLEAN NOT NULL, meetup_id VARCHAR(255) DEFAULT NULL, short_description VARCHAR(500) NOT NULL, start_date_time TIMESTAMP(0) WITH TIME ZONE NOT NULL, end_date_time TIMESTAMP(0) WITH TIME ZONE DEFAULT NULL, description_html TEXT DEFAULT NULL, description_markdown TEXT DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_A891181F989D9B62 ON edition (slug)');
         $this->addSql('CREATE INDEX IDX_A891181F12469DE2 ON edition (category_id)');
         $this->addSql('CREATE INDEX IDX_A891181F77E5854A ON edition (mode_id)');
         $this->addSql('CREATE INDEX IDX_A891181FDA6A219 ON edition (place_id)');
@@ -39,11 +43,16 @@ final class Version20201220093734 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_A891181F876C4DDA ON edition (organizer_id)');
         $this->addSql('CREATE TABLE edition_category (id INT NOT NULL, label VARCHAR(50) NOT NULL, description VARCHAR(350) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE edition_mode (id INT NOT NULL, label VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE organization (id INT NOT NULL, name VARCHAR(255) NOT NULL, description TEXT DEFAULT NULL, url VARCHAR(255) DEFAULT NULL, logo VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE place (id INT NOT NULL, name VARCHAR(255) NOT NULL, description TEXT DEFAULT NULL, url VARCHAR(500) DEFAULT NULL, address1 VARCHAR(255) NOT NULL, address2 VARCHAR(255) DEFAULT NULL, postal_code VARCHAR(10) NOT NULL, city VARCHAR(255) NOT NULL, coutry VARCHAR(255) DEFAULT NULL, logo VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE speaker (id INT NOT NULL, name VARCHAR(255) NOT NULL, short_biography VARCHAR(400) DEFAULT NULL, biography TEXT DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE tag (id INT NOT NULL, label VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE talk (id INT NOT NULL, type_id INT NOT NULL, edition_id INT NOT NULL, title VARCHAR(255) NOT NULL, description TEXT NOT NULL, short_description VARCHAR(500) NOT NULL, video VARCHAR(500) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE organization (id INT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, description TEXT DEFAULT NULL, url VARCHAR(255) DEFAULT NULL, logo VARCHAR(255) DEFAULT NULL, description_html TEXT DEFAULT NULL, description_markdown TEXT DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_C1EE637C989D9B62 ON organization (slug)');
+        $this->addSql('CREATE TABLE place (id INT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, description TEXT DEFAULT NULL, url VARCHAR(500) DEFAULT NULL, address1 VARCHAR(255) NOT NULL, address2 VARCHAR(255) DEFAULT NULL, city VARCHAR(255) NOT NULL, logo VARCHAR(255) DEFAULT NULL, description_html TEXT DEFAULT NULL, description_markdown TEXT DEFAULT NULL, postal_code VARCHAR(255) NOT NULL, country VARCHAR(5) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_741D53CD989D9B62 ON place (slug)');
+        $this->addSql('CREATE TABLE speaker (id INT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, biography TEXT DEFAULT NULL, short_biography VARCHAR(500) NOT NULL, biography_html TEXT DEFAULT NULL, biography_markdown TEXT DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_7B85DB61989D9B62 ON speaker (slug)');
+        $this->addSql('CREATE TABLE tag (id INT NOT NULL, label VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_389B783989D9B62 ON tag (slug)');
+        $this->addSql('CREATE TABLE talk (id INT NOT NULL, type_id INT NOT NULL, edition_id INT NOT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, description TEXT NOT NULL, video VARCHAR(500) DEFAULT NULL, short_description VARCHAR(500) NOT NULL, description_html TEXT DEFAULT NULL, description_markdown TEXT DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_9F24D5BB989D9B62 ON talk (slug)');
         $this->addSql('CREATE INDEX IDX_9F24D5BBC54C8C93 ON talk (type_id)');
         $this->addSql('CREATE INDEX IDX_9F24D5BB74281A5E ON talk (edition_id)');
         $this->addSql('CREATE TABLE talk_tag (talk_id INT NOT NULL, tag_id INT NOT NULL, PRIMARY KEY(talk_id, tag_id))');
@@ -52,7 +61,7 @@ final class Version20201220093734 extends AbstractMigration
         $this->addSql('CREATE TABLE talk_speaker (talk_id INT NOT NULL, speaker_id INT NOT NULL, PRIMARY KEY(talk_id, speaker_id))');
         $this->addSql('CREATE INDEX IDX_B2C12BEE6F0601D5 ON talk_speaker (talk_id)');
         $this->addSql('CREATE INDEX IDX_B2C12BEED04A0F27 ON talk_speaker (speaker_id)');
-        $this->addSql('CREATE TABLE talk_type (id INT NOT NULL, label VARCHAR(50) NOT NULL, description VARCHAR(500) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE talk_type (id INT NOT NULL, label VARCHAR(50) NOT NULL, description VARCHAR(500) DEFAULT NULL, duration_in_minutes INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE web_site (id INT NOT NULL, type_id INT NOT NULL, speaker_id INT DEFAULT NULL, url VARCHAR(500) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_AD410411C54C8C93 ON web_site (type_id)');
         $this->addSql('CREATE INDEX IDX_AD410411D04A0F27 ON web_site (speaker_id)');
@@ -72,7 +81,7 @@ final class Version20201220093734 extends AbstractMigration
         $this->addSql('ALTER TABLE web_site ADD CONSTRAINT FK_AD410411D04A0F27 FOREIGN KEY (speaker_id) REFERENCES speaker (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
@@ -89,6 +98,7 @@ final class Version20201220093734 extends AbstractMigration
         $this->addSql('ALTER TABLE talk_speaker DROP CONSTRAINT FK_B2C12BEE6F0601D5');
         $this->addSql('ALTER TABLE talk DROP CONSTRAINT FK_9F24D5BBC54C8C93');
         $this->addSql('ALTER TABLE web_site DROP CONSTRAINT FK_AD410411C54C8C93');
+        $this->addSql('DROP SEQUENCE admin_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE edition_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE edition_category_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE edition_mode_id_seq CASCADE');
@@ -100,6 +110,7 @@ final class Version20201220093734 extends AbstractMigration
         $this->addSql('DROP SEQUENCE talk_type_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE web_site_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE web_site_type_id_seq CASCADE');
+        $this->addSql('DROP TABLE admin');
         $this->addSql('DROP TABLE edition');
         $this->addSql('DROP TABLE edition_category');
         $this->addSql('DROP TABLE edition_mode');

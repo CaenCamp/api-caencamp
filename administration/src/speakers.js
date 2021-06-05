@@ -56,7 +56,7 @@ const SpeakerList = (props) => {
     >
       <Datagrid>
         <TextField source="name" sortable={true} />
-        <TextField source="shortbiography" sortable={false} />
+        <TextField source="shortBiography" sortable={false} />
         <WebsitesField source="websites" sortable={false} />
         <TalksField source="talks" sortable={false} />
         <EditButton />
@@ -75,7 +75,7 @@ export const SpeakerEdit = (props) => (
         <TextInput fullWidth source="name" validate={required()} />
         <TextInput
           fullWidth
-          source="shortbiography"
+          source="shortBiography"
           label="Bio rapide"
           validate={required()}
         />
@@ -103,7 +103,7 @@ export const SpeakerCreate = (props) => (
       <TextInput fullWidth source="name" validate={required()} />
       <TextInput
         fullWidth
-        source="shortbiography"
+        source="shortBiography"
         label="Bio rapide"
         validate={required()}
       />

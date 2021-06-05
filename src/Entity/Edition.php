@@ -43,15 +43,9 @@ class Edition
     private $number;
 
     /**
-     * @ORM\Column(type="string", length=400)
-     * @Groups({"public-speaker"})
-     */
-    private $ShortDescription;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $Description;
+    private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=EditionCategory::class, inversedBy="editions")
@@ -73,16 +67,6 @@ class Edition
     private $Place;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $StartDateTime;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $EndDateTime;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Organization::class, inversedBy="sponsorings")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -100,16 +84,6 @@ class Edition
     private $talks;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description_html;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description_markdown;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $published;
@@ -118,6 +92,32 @@ class Edition
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $meetup_id;
+
+    /**
+     * @ORM\Column(type="string", length=500)
+     * @Groups({"public-speaker"})
+     */
+    private $shortDescription;
+
+    /**
+     * @ORM\Column(type="datetimetz")
+     */
+    private $startDateTime;
+
+    /**
+     * @ORM\Column(type="datetimetz", nullable=true)
+     */
+    private $endDateTime;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descriptionHtml;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descriptionMarkdown;
 
     public function __construct()
     {
@@ -168,24 +168,24 @@ class Edition
 
     public function getShortDescription(): ?string
     {
-        return $this->ShortDescription;
+        return $this->shortDescription;
     }
 
-    public function setShortDescription(string $ShortDescription): self
+    public function setShortDescription(string $shortDescription): self
     {
-        $this->ShortDescription = $ShortDescription;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
 
     public function getDescription(): ?string
     {
-        return $this->Description;
+        return $this->description;
     }
 
-    public function setDescription(?string $Description): self
+    public function setDescription(?string $description): self
     {
-        $this->Description = $Description;
+        $this->description = $description;
 
         return $this;
     }
@@ -228,24 +228,24 @@ class Edition
 
     public function getStartDateTime(): ?\DateTimeInterface
     {
-        return $this->StartDateTime;
+        return $this->startDateTime;
     }
 
-    public function setStartDateTime(\DateTimeInterface $StartDateTime): self
+    public function setStartDateTime(\DateTimeInterface $startDateTime): self
     {
-        $this->StartDateTime = $StartDateTime;
+        $this->startDateTime = $startDateTime;
 
         return $this;
     }
 
     public function getEndDateTime(): ?\DateTimeInterface
     {
-        return $this->EndDateTime;
+        return $this->endDateTime;
     }
 
-    public function setEndDateTime(?\DateTimeInterface $EndDateTime): self
+    public function setEndDateTime(?\DateTimeInterface $endDateTime): self
     {
-        $this->EndDateTime = $EndDateTime;
+        $this->endDateTime = $endDateTime;
 
         return $this;
     }
@@ -306,24 +306,24 @@ class Edition
 
     public function getDescriptionHtml(): ?string
     {
-        return $this->description_html;
+        return $this->descriptionHtml;
     }
 
-    public function setDescriptionHtml(?string $description_html): self
+    public function setDescriptionHtml(?string $descriptionHtml): self
     {
-        $this->description_html = $description_html;
+        $this->descriptionHtml = $descriptionHtml;
 
         return $this;
     }
 
     public function getDescriptionMarkdown(): ?string
     {
-        return $this->description_markdown;
+        return $this->descriptionMarkdown;
     }
 
-    public function setDescriptionMarkdown(?string $description_markdown): self
+    public function setDescriptionMarkdown(?string $descriptionMarkdown): self
     {
-        $this->description_markdown = $description_markdown;
+        $this->descriptionMarkdown = $descriptionMarkdown;
 
         return $this;
     }

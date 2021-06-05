@@ -60,11 +60,6 @@ class Speaker
      */
     private $slug;
 
-    /**
-     * @ORM\Column(type="string", length=400, nullable=true)
-     * @Groups({"public-speaker"})
-     */
-    private $shortbiography;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -85,14 +80,20 @@ class Speaker
     private $talks;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=500)
+     * @Groups({"public-speaker"})
      */
-    private $biographyhtml;
+    private $shortBiography;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $biographymarkdown;
+    private $biographyHtml;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $biographyMarkdown;
 
     public function __construct()
     {
@@ -131,18 +132,6 @@ class Speaker
     }
 
 
-    public function getShortbiography(): ?string
-    {
-        return $this->shortbiography;
-    }
-
-    public function setShortbiography(?string $shortbiography): self
-    {
-        $this->shortbiography = $shortbiography;
-
-        return $this;
-    }
-
     public function getBiography(): ?string
     {
         return $this->biography;
@@ -151,6 +140,18 @@ class Speaker
     public function setBiography(?string $biography): self
     {
         $this->biography = $biography;
+
+        return $this;
+    }
+
+    public function getShortBiography(): ?string
+    {
+        return $this->shortBiography;
+    }
+
+    public function setShortBiography(?string $shortBiography): self
+    {
+        $this->shortBiography = $shortBiography;
 
         return $this;
     }
@@ -212,26 +213,26 @@ class Speaker
         return $this;
     }
 
-    public function getBiographyhtml(): ?string
+    public function getBiographyHtml(): ?string
     {
-        return $this->biographyhtml;
+        return $this->biographyHtml;
     }
 
-    public function setBiographyhtml(?string $biographyhtml): self
+    public function setBiographyHtml(?string $biographyHtml): self
     {
-        $this->biographyhtml = $biographyhtml;
+        $this->biographyHtml = $biographyHtml;
 
         return $this;
     }
 
-    public function getBiographymarkdown(): ?string
+    public function getBiographyMarkdown(): ?string
     {
-        return $this->biographymarkdown;
+        return $this->biographyMarkdown;
     }
 
-    public function setBiographymarkdown(?string $biographymarkdown): self
+    public function setBiographyMarkdown(?string $biographyMarkdown): self
     {
-        $this->biographymarkdown = $biographymarkdown;
+        $this->biographyMarkdown = $biographyMarkdown;
 
         return $this;
     }

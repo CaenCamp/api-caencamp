@@ -60,12 +60,12 @@ class Organization
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description_html;
+    private $descriptionHtml;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description_markdown;
+    private $descriptionMarkdown;
 
     public function __construct()
     {
@@ -200,24 +200,24 @@ class Organization
 
     public function getDescriptionHtml(): ?string
     {
-        return $this->description_html;
+        return $this->descriptionHtml;
     }
 
-    public function setDescriptionHtml(?string $description_html): self
+    public function setDescriptionHtml(?string $descriptionHtml): self
     {
-        $this->description_html = $description_html;
+        $this->descriptionHtml = $descriptionHtml;
 
         return $this;
     }
 
     public function getDescriptionMarkdown(): ?string
     {
-        return $this->description_markdown;
+        return $this->descriptionMarkdown;
     }
 
-    public function setDescriptionMarkdown(?string $description_markdown): self
+    public function setDescriptionMarkdown(?string $descriptionMarkdown): self
     {
-        $this->description_markdown = $description_markdown;
+        $this->descriptionMarkdown = $descriptionMarkdown;
 
         return $this;
     }

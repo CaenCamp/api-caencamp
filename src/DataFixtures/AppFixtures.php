@@ -55,7 +55,7 @@ class AppFixtures extends Fixture
         $manager->persist($linkedin);
 
         $perso = new WebSiteType();
-        $perso->setLabel('github');
+        $perso->setLabel('perso');
         $manager->persist($perso);
 
         $longTalk = new TalkType();
