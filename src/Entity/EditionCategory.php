@@ -23,7 +23,7 @@ class EditionCategory
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "public-place"})
      */
     private $label;
 

@@ -19,19 +19,20 @@ class Edition
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"public-speaker", "public-place"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=350)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "public-place"})
      */
     private $title;
 
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=350,unique=true)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "public-place"})
      */
     private $slug;
 
@@ -55,7 +56,7 @@ class Edition
     /**
      * @ORM\ManyToOne(targetEntity=EditionCategory::class, inversedBy="editions")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "public-place"})
      */
     private $Category;
 

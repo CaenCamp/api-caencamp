@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
         $forum->setAddress2("8 rue Léopold Sedar Senghor");
         $forum->setPostalCode("14460");
         $forum->setCity("Colombelles");
-        $forum->setCoutry("FR");
+        $forum->setCountry("FR");
         $manager->persist($forum);
 
         $dome = new Place();
@@ -94,7 +94,7 @@ class AppFixtures extends Fixture
         $dome->setAddress1("3 Esplanade Stéphane Hessel");
         $dome->setPostalCode("14000");
         $dome->setCity("Caen");
-        $dome->setCoutry("FR");
+        $dome->setCountry("FR");
         $manager->persist($dome);
 
         $imie = new Place();
@@ -104,7 +104,7 @@ class AppFixtures extends Fixture
         $imie->setAddress1(" 10 place François Mitterrand");
         $imie->setPostalCode("14200");
         $imie->setCity("Hérouville-Saint-Clair");
-        $imie->setCoutry("FR");
+        $imie->setCountry("FR");
         $manager->persist($imie);
 
         $hey = new Place();
@@ -114,7 +114,7 @@ class AppFixtures extends Fixture
         $hey->setAddress1("47 quai de juillet");
         $hey->setPostalCode("14000");
         $hey->setCity("Caen");
-        $hey->setCoutry("FR");
+        $hey->setCountry("FR");
         $manager->persist($hey);
 
         $incubation = new Place();
@@ -124,7 +124,7 @@ class AppFixtures extends Fixture
         $incubation->setAddress1("17 rue Claude Bloch");
         $incubation->setPostalCode("14000");
         $incubation->setCity("Caen");
-        $incubation->setCoutry("FR");
+        $incubation->setCountry("FR");
         $manager->persist($incubation);
 
         $editionCategoryCC = new EditionCategory();

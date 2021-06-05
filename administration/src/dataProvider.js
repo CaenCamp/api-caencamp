@@ -86,8 +86,8 @@ const getDataProvider = () => ({
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
 
-        const rangeStart = (page - 1) * perPage;
-        const rangeEnd = page * perPage - 1;
+        // const rangeStart = (page - 1) * perPage;
+        // const rangeEnd = page * perPage - 1;
 
         const query = {
             sort: JSON.stringify([field, order]),

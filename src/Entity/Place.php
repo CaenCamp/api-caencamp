@@ -3,89 +3,128 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Repository\PlaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=PlaceRepository::class)
  */
+#[ApiResource(
+    collectionOperations: [
+        'get',
+        'post' => ['security' => "is_granted('ROLE_ADMIN')"]
+    ],
+    itemOperations: [
+        'get',
+        'put' => ['security' => "is_granted('ROLE_ADMIN')"],
+        'delete' => ['security' => "is_granted('ROLE_ADMIN')"]
+    ],
+    normalizationContext: ['groups' => ['public-place']],
+)]
+#[ApiFilter(
+    OrderFilter::class,
+    properties: ['id', 'name', 'postalCode'],
+    arguments: ['orderParameterName' => 'order']
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: ['name' => 'ipartial'])
+]
 class Place
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"public-place"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"public-place"})
      */
     private $name;
 
     /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=255,unique=true)
+     * @Groups({"public-place"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"public-place"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups({"public-place"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"public-place"})
      */
     private $address1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"public-place"})
      */
     private $address2;
 
     /**
-     * @ORM\Column(type="string", length=10)
-     */
-    private $postal_code;
-
-    /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"public-place"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $coutry;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"public-place"})
      */
     private $logo;
 
     /**
      * @ORM\OneToMany(targetEntity=Edition::class, mappedBy="Place")
+     * @Groups({"public-place"})
      */
     private $editions;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"public-place"})
      */
-    private $description_html;
+    private $decriptionHtml;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"public-place"})
      */
-    private $description_markdown;
+    private $decriptionMarkdown;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"public-place"})
+     */
+    private $postalCode;
+
+    /**
+     * @ORM\Column(type="string", length=5)
+     * @Groups({"public-place"})
+     */
+    private $country;
 
     public function __construct()
     {
@@ -172,12 +211,12 @@ class Place
 
     public function getPostalCode(): ?string
     {
-        return $this->postal_code;
+        return $this->postalCode;
     }
 
-    public function setPostalCode(string $postal_code): self
+    public function setPostalCode(string $postalCode): self
     {
-        $this->postal_code = $postal_code;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
@@ -190,18 +229,6 @@ class Place
     public function setCity(string $city): self
     {
         $this->city = $city;
-
-        return $this;
-    }
-
-    public function getCoutry(): ?string
-    {
-        return $this->coutry;
-    }
-
-    public function setCoutry(?string $coutry): self
-    {
-        $this->coutry = $coutry;
 
         return $this;
     }
@@ -248,26 +275,38 @@ class Place
         return $this;
     }
 
-    public function getDescriptionHtml(): ?string
+    public function getDecriptionHtml(): ?string
     {
-        return $this->description_html;
+        return $this->decriptionHtml;
     }
 
-    public function setDescriptionHtml(?string $description_html): self
+    public function setDecriptionHtml(?string $decriptionHtml): self
     {
-        $this->description_html = $description_html;
+        $this->decriptionHtml = $decriptionHtml;
 
         return $this;
     }
 
-    public function getDescriptionMarkdown(): ?string
+    public function getDecriptionMarkdown(): ?string
     {
-        return $this->description_markdown;
+        return $this->decriptionMarkdown;
     }
 
-    public function setDescriptionMarkdown(?string $description_markdown): self
+    public function setDecriptionMarkdown(?string $decriptionMarkdown): self
     {
-        $this->description_markdown = $description_markdown;
+        $this->decriptionMarkdown = $decriptionMarkdown;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

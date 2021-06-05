@@ -6,10 +6,10 @@ help: ## Display available commands
 install: ## Install php deps
 	composer install
 
-start: ## start dev environment en daemon mode
+start: db-start ## start dev environment en daemon mode
 	symfony server:start -d
 
-stop: ## stop dev environment
+stop: db-stop ## stop dev environment
 	symfony server:stop
 
 logs: ## Display dev server logs

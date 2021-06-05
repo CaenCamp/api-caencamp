@@ -10,13 +10,9 @@ import {
   List,
   Pagination,
   SimpleForm,
-  SelectInput,
-  SelectArrayInput,
   TextField,
   TextInput,
-  maxLength,
   required,
-  ReferenceArrayInput,
   TabbedForm,
   FormTab,
 } from "react-admin";
@@ -53,7 +49,7 @@ const SpeakerList = (props) => {
       {...props}
       filters={<SpeakerFilters />}
       filterDefaultValues={{}}
-      sort={{ field: "id", order: "DESC" }}
+      sort={{ field: "name", order: "ASC" }}
       exporter={false}
       pagination={<SpeakerPagination />}
       bulkActionButtons={false}
