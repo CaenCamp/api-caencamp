@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          php-version: "7.4"
+          php-version: "8"
 
       - uses: php-actions/composer@v4
         with:
-          php-version: "7.4"
+          php-version: "8"
 
       - name: PHPUnit
         uses: chindit/actions-phpunit-symfony@master
         with:
-          php-version: "7.4"
+          php-version: "8"
