@@ -1897,7 +1897,7 @@
             },
             "require": {
                 "laminas/laminas-eventmanager": "^3.3",
-                "php": "^7.4 || ~8.0.0"
+                "php": "~8.0.0"
             },
             "conflict": {
                 "phpspec/prophecy": "<1.9.0"
@@ -2095,7 +2095,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4 || ^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
                 "infection/infection": "^0.17",
@@ -2162,7 +2162,7 @@
                 "ext-openssl": "*",
                 "ext-sodium": "*",
                 "lcobucci/clock": "^2.0",
-                "php": "^7.4 || ^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
                 "infection/infection": "^0.21",
