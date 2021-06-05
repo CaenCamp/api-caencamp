@@ -19,7 +19,7 @@ class Talk
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "tag-managment", "talk-type-managment"})
      */
     private $id;
 

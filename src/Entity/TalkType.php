@@ -3,6 +3,10 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+
 use App\Repository\TalkTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,24 +16,46 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=TalkTypeRepository::class)
  */
+#[ApiResource(
+    collectionOperations: [
+        'get',
+        'post' => ['security' => "is_granted('ROLE_ADMIN')"]
+    ],
+    itemOperations: [
+        'get',
+        'put' => ['security' => "is_granted('ROLE_ADMIN')"],
+        'delete' => ['security' => "is_granted('ROLE_ADMIN')"]
+    ],
+    normalizationContext: ['groups' => ['talk-type-managment']],
+)]
+#[ApiFilter(
+    OrderFilter::class,
+    properties: ['label'],
+    arguments: ['orderParameterName' => 'order']
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: ['label' => 'ipartial'])
+]
 class TalkType
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"talk-type-managment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-type-managment"})
      */
     private $label;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-type-managment"})
      */
     private $description;
 
@@ -40,9 +66,9 @@ class TalkType
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-type-managment"})
      */
-    private $duration_in_minutes;
+    private $durationInMinutes;
 
     public function __construct()
     {
@@ -110,12 +136,12 @@ class TalkType
 
     public function getDurationInMinutes(): ?int
     {
-        return $this->duration_in_minutes;
+        return $this->durationInMinutes;
     }
 
-    public function setDurationInMinutes(int $duration_in_minutes): self
+    public function setDurationInMinutes(int $durationInMinutes): self
     {
-        $this->duration_in_minutes = $duration_in_minutes;
+        $this->durationInMinutes = $durationInMinutes;
 
         return $this;
     }
