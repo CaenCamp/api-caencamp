@@ -9,6 +9,7 @@ import webSiteTypes from './webSiteTypes';
 import tags from './tags';
 import talkTypes from './talkTypes';
 import editionCategories from './editionCategories';
+import editionModes from './editionModes';
 
 const App = () => (
     <Admin authProvider={authProvider} dataProvider={getDataProvider()}>
@@ -18,6 +19,7 @@ const App = () => (
         <Resource name="tags" {...tags} />
         <Resource name="talk_types" {...talkTypes} />
         <Resource name="edition_categories" {...editionCategories} />
+        <Resource name="edition_modes" {...editionModes} />
     </Admin>
 );
 
