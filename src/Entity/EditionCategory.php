@@ -49,13 +49,13 @@ class EditionCategory
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"public-speaker", "public-place", "edition-category-managment"})
+     * @Groups({"public-speaker", "public-place", "edition-category-managment", "talk-managment"})
      */
     private $label;
 
     /**
      * @ORM\Column(type="string", length=350, nullable=true)
-     * @Groups({"public-speaker", "edition-category-managment"})
+     * @Groups({"public-speaker", "edition-category-managment", "talk-managment"})
      */
     private $description;
 

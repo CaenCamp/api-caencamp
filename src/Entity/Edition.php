@@ -19,13 +19,13 @@ class Edition
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"public-speaker", "public-place"})
+     * @Groups({"public-speaker", "public-place", "talk-managment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=350)
-     * @Groups({"public-speaker", "public-place"})
+     * @Groups({"public-speaker", "public-place", "talk-managment"})
      */
     private $title;
 
@@ -38,7 +38,7 @@ class Edition
 
     /**
      * @ORM\Column(type="smallint")
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-managment"})
      */
     private $number;
 
@@ -50,14 +50,14 @@ class Edition
     /**
      * @ORM\ManyToOne(targetEntity=EditionCategory::class, inversedBy="editions")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"public-speaker", "public-place"})
+     * @Groups({"public-speaker", "public-place", "talk-managment"})
      */
     private $Category;
 
     /**
      * @ORM\ManyToOne(targetEntity=EditionMode::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-managment"})
      */
     private $Mode;
 
@@ -95,12 +95,13 @@ class Edition
 
     /**
      * @ORM\Column(type="string", length=500)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-managment"})
      */
     private $shortDescription;
 
     /**
      * @ORM\Column(type="datetimetz")
+     * @Groups({"public-speaker", "talk-managment"})
      */
     private $startDateTime;
 

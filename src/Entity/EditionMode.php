@@ -45,7 +45,7 @@ class EditionMode
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-managment"})
      */
     private $label;
 

@@ -50,7 +50,7 @@ class Tag
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"tag-managment"})
+     * @Groups({"tag-managment", "talk-managment"})
      */
     private $label;
 

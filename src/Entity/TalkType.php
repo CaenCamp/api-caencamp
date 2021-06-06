@@ -49,13 +49,13 @@ class TalkType
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"public-speaker", "talk-type-managment"})
+     * @Groups({"public-speaker", "talk-type-managment", "talk-managment"})
      */
     private $label;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
-     * @Groups({"public-speaker", "talk-type-managment"})
+     * @Groups({"public-speaker", "talk-type-managment", "talk-managment"})
      */
     private $description;
 

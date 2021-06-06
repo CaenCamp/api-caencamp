@@ -11,9 +11,11 @@ import talkTypes from './talkTypes';
 import editionCategories from './editionCategories';
 import editionModes from './editionModes';
 import organizations from './organizations';
+import talks from './talks';
 
 const App = () => (
     <Admin authProvider={authProvider} dataProvider={getDataProvider()}>
+        <Resource name="talks" {...talks} options={{ label: 'Les talks' }}/>
         <Resource name="speakers" {...speakers} options={{ label: 'Les speakers' }}/>
         <Resource name="organizations" {...organizations} options={{ label: 'Les boites' }}/>
         <Resource name="places" {...places}  options={{ label: 'Les lieux' }}/>

@@ -43,13 +43,13 @@ class Speaker
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-managment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-managment"})
      */
     private $name;
 
@@ -81,7 +81,7 @@ class Speaker
 
     /**
      * @ORM\Column(type="string", length=500)
-     * @Groups({"public-speaker"})
+     * @Groups({"public-speaker", "talk-managment"})
      */
     private $shortBiography;
 
